@@ -1,0 +1,22 @@
+strings:
+  inputs:
+    - OctoSearch/Resources/en.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift4
+      output: OctoSearch/Generated/Strings.swift
+xcassets:
+  inputs:
+    - OctoSearch/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift4
+      output: OctoSearch/Generated/Assets.swift
+ib:
+  inputs:
+  - OctoSearch/Search/Base.lproj/SearchViewController.storyboard
+  outputs:
+  - templateName: scenes-swift5
+    output: OctoSearch/Generated/StoryboardScenes.swift
+  - templateName: segues-swift5
+    output: OctoSearch/Generated/StoryboardSegues.swift
+  params:
+    ignoreTargetModule: true

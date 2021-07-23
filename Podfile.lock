@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.4.3)
-  - CocoaLumberjack/Core (3.5.3)
-  - CocoaLumberjack/Swift (3.5.3):
+  - CocoaLumberjack/Core (3.7.2)
+  - CocoaLumberjack/Swift (3.7.2):
     - CocoaLumberjack/Core
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
@@ -31,6 +31,9 @@ PODS:
     - RxSwift (~> 5)
   - SwiftGen (6.4.0)
   - SwiftLint (0.43.1)
+  - Swinject (2.6.0)
+  - SwinjectStoryboard (2.2.0):
+    - Swinject (~> 2.6)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
@@ -43,6 +46,9 @@ DEPENDENCIES:
   - RxTest
   - SwiftGen
   - SwiftLint
+  - Swinject
+  - Swinject (= 2.6.0)
+  - SwinjectStoryboard (= 2.2.0)
 
 SPEC REPOS:
   trunk:
@@ -59,10 +65,12 @@ SPEC REPOS:
     - RxTest
     - SwiftGen
     - SwiftLint
+    - Swinject
+    - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
@@ -74,7 +82,9 @@ SPEC CHECKSUMS:
   RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
   SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
+  SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: 290c233e7b02ff9064f2933436b7813a992f47ce
+PODFILE CHECKSUM: 740fbe1bac57c1887e3df6bbf656db6ec6e60374
 
 COCOAPODS: 1.10.1
