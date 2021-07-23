@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D07AC1E26AB0C8C00152739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07AC1D26AB0C8C00152739 /* AppDelegate.swift */; };
+		4D07AC2026AB0C8C00152739 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07AC1F26AB0C8C00152739 /* SceneDelegate.swift */; };
+		4D07AC2226AB0C8C00152739 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07AC2126AB0C8C00152739 /* ViewController.swift */; };
+		4D07AC2526AB0C8C00152739 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D07AC2326AB0C8C00152739 /* Main.storyboard */; };
+		4D07AC2726AB0C8E00152739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D07AC2626AB0C8E00152739 /* Assets.xcassets */; };
+		4D07AC2A26AB0C8E00152739 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D07AC2826AB0C8E00152739 /* LaunchScreen.storyboard */; };
+		4D07AC3526AB0C8E00152739 /* OctoSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07AC3426AB0C8E00152739 /* OctoSearchTests.swift */; };
+		4D35F46A26AB1E89001A0524 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F46926AB1E89001A0524 /* AppFlow.swift */; };
+		4D35F47226AB1EA2001A0524 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F47126AB1EA2001A0524 /* AppStep.swift */; };
+		66E3602D36A55DF5DC3C3234 /* Pods_OctoSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631ECFA86DC8C70373348BA /* Pods_OctoSearch.framework */; };
+		8E8508622078D4AD21257AA3 /* Pods_OctoSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBEF164E17DE7BADECBDBAC /* Pods_OctoSearchTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4D07AC3126AB0C8E00152739 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D07AC1226AB0C8C00152739 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D07AC1926AB0C8C00152739;
+			remoteInfo = OctoSearch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4D07AC1A26AB0C8C00152739 /* OctoSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D07AC1D26AB0C8C00152739 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4D07AC1F26AB0C8C00152739 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4D07AC2126AB0C8C00152739 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4D07AC2426AB0C8C00152739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4D07AC2626AB0C8E00152739 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D07AC2926AB0C8E00152739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4D07AC2B26AB0C8E00152739 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D07AC3026AB0C8E00152739 /* OctoSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D07AC3426AB0C8E00152739 /* OctoSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoSearchTests.swift; sourceTree = "<group>"; };
+		4D07AC3626AB0C8E00152739 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D35F46926AB1E89001A0524 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
+		4D35F47126AB1EA2001A0524 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
+		7631ECFA86DC8C70373348BA /* Pods_OctoSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OctoSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8434F85306F9FDF93309A6AA /* Pods-OctoSearchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoSearchTests.debug.xcconfig"; path = "Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests.debug.xcconfig"; sourceTree = "<group>"; };
+		959BC9A9147CB48A62AFFE4D /* Pods-OctoSearchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoSearchTests.release.xcconfig"; path = "Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests.release.xcconfig"; sourceTree = "<group>"; };
+		BBB5B5329CD1F3AC2C8AF856 /* Pods-OctoSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoSearch.release.xcconfig"; path = "Target Support Files/Pods-OctoSearch/Pods-OctoSearch.release.xcconfig"; sourceTree = "<group>"; };
+		DDBEF164E17DE7BADECBDBAC /* Pods_OctoSearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OctoSearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3FB53633289145467AE2FDE /* Pods-OctoSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoSearch.debug.xcconfig"; path = "Target Support Files/Pods-OctoSearch/Pods-OctoSearch.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4D07AC1726AB0C8C00152739 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66E3602D36A55DF5DC3C3234 /* Pods_OctoSearch.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D07AC2D26AB0C8E00152739 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E8508622078D4AD21257AA3 /* Pods_OctoSearchTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17209FE9D2069C3ADC8504EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F3FB53633289145467AE2FDE /* Pods-OctoSearch.debug.xcconfig */,
+				BBB5B5329CD1F3AC2C8AF856 /* Pods-OctoSearch.release.xcconfig */,
+				8434F85306F9FDF93309A6AA /* Pods-OctoSearchTests.debug.xcconfig */,
+				959BC9A9147CB48A62AFFE4D /* Pods-OctoSearchTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4D07AC1126AB0C8C00152739 = {
+			isa = PBXGroup;
+			children = (
+				4D07AC1C26AB0C8C00152739 /* OctoSearch */,
+				4D07AC3326AB0C8E00152739 /* OctoSearchTests */,
+				4D07AC1B26AB0C8C00152739 /* Products */,
+				17209FE9D2069C3ADC8504EF /* Pods */,
+				8555DE7C96398AA883AB2078 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4D07AC1B26AB0C8C00152739 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4D07AC1A26AB0C8C00152739 /* OctoSearch.app */,
+				4D07AC3026AB0C8E00152739 /* OctoSearchTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4D07AC1C26AB0C8C00152739 /* OctoSearch */ = {
+			isa = PBXGroup;
+			children = (
+				4D35F46826AB1E7D001A0524 /* Flow */,
+				4D07AC1D26AB0C8C00152739 /* AppDelegate.swift */,
+				4D07AC1F26AB0C8C00152739 /* SceneDelegate.swift */,
+				4D07AC2126AB0C8C00152739 /* ViewController.swift */,
+				4D07AC2326AB0C8C00152739 /* Main.storyboard */,
+				4D07AC2626AB0C8E00152739 /* Assets.xcassets */,
+				4D07AC2826AB0C8E00152739 /* LaunchScreen.storyboard */,
+				4D07AC2B26AB0C8E00152739 /* Info.plist */,
+			);
+			path = OctoSearch;
+			sourceTree = "<group>";
+		};
+		4D07AC3326AB0C8E00152739 /* OctoSearchTests */ = {
+			isa = PBXGroup;
+			children = (
+				4D07AC3426AB0C8E00152739 /* OctoSearchTests.swift */,
+				4D07AC3626AB0C8E00152739 /* Info.plist */,
+			);
+			path = OctoSearchTests;
+			sourceTree = "<group>";
+		};
+		4D35F46826AB1E7D001A0524 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				4D35F46926AB1E89001A0524 /* AppFlow.swift */,
+				4D35F47126AB1EA2001A0524 /* AppStep.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		8555DE7C96398AA883AB2078 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7631ECFA86DC8C70373348BA /* Pods_OctoSearch.framework */,
+				DDBEF164E17DE7BADECBDBAC /* Pods_OctoSearchTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4D07AC1926AB0C8C00152739 /* OctoSearch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D07AC4426AB0C8E00152739 /* Build configuration list for PBXNativeTarget "OctoSearch" */;
+			buildPhases = (
+				3693BB14A89C82BADBE2C450 /* [CP] Check Pods Manifest.lock */,
+				4D07AC1626AB0C8C00152739 /* Sources */,
+				4D07AC1726AB0C8C00152739 /* Frameworks */,
+				4D07AC1826AB0C8C00152739 /* Resources */,
+				6FB7D6EEFCCF79A7E1A97548 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OctoSearch;
+			productName = OctoSearch;
+			productReference = 4D07AC1A26AB0C8C00152739 /* OctoSearch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4D07AC2F26AB0C8E00152739 /* OctoSearchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D07AC4726AB0C8E00152739 /* Build configuration list for PBXNativeTarget "OctoSearchTests" */;
+			buildPhases = (
+				66EB1896598AF8AF6296DB73 /* [CP] Check Pods Manifest.lock */,
+				4D07AC2C26AB0C8E00152739 /* Sources */,
+				4D07AC2D26AB0C8E00152739 /* Frameworks */,
+				4D07AC2E26AB0C8E00152739 /* Resources */,
+				6A7D2C1743C28A73C0B053BB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D07AC3226AB0C8E00152739 /* PBXTargetDependency */,
+			);
+			name = OctoSearchTests;
+			productName = OctoSearchTests;
+			productReference = 4D07AC3026AB0C8E00152739 /* OctoSearchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4D07AC1226AB0C8C00152739 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					4D07AC1926AB0C8C00152739 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					4D07AC2F26AB0C8E00152739 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 4D07AC1926AB0C8C00152739;
+					};
+				};
+			};
+			buildConfigurationList = 4D07AC1526AB0C8C00152739 /* Build configuration list for PBXProject "OctoSearch" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4D07AC1126AB0C8C00152739;
+			productRefGroup = 4D07AC1B26AB0C8C00152739 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4D07AC1926AB0C8C00152739 /* OctoSearch */,
+				4D07AC2F26AB0C8E00152739 /* OctoSearchTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4D07AC1826AB0C8C00152739 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D07AC2A26AB0C8E00152739 /* LaunchScreen.storyboard in Resources */,
+				4D07AC2726AB0C8E00152739 /* Assets.xcassets in Resources */,
+				4D07AC2526AB0C8C00152739 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D07AC2E26AB0C8E00152739 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3693BB14A89C82BADBE2C450 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OctoSearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66EB1896598AF8AF6296DB73 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OctoSearchTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A7D2C1743C28A73C0B053BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FB7D6EEFCCF79A7E1A97548 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OctoSearch/Pods-OctoSearch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OctoSearch/Pods-OctoSearch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OctoSearch/Pods-OctoSearch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4D07AC1626AB0C8C00152739 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D35F47226AB1EA2001A0524 /* AppStep.swift in Sources */,
+				4D07AC2226AB0C8C00152739 /* ViewController.swift in Sources */,
+				4D35F46A26AB1E89001A0524 /* AppFlow.swift in Sources */,
+				4D07AC1E26AB0C8C00152739 /* AppDelegate.swift in Sources */,
+				4D07AC2026AB0C8C00152739 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D07AC2C26AB0C8E00152739 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D07AC3526AB0C8E00152739 /* OctoSearchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D07AC3226AB0C8E00152739 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D07AC1926AB0C8C00152739 /* OctoSearch */;
+			targetProxy = 4D07AC3126AB0C8E00152739 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4D07AC2326AB0C8C00152739 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D07AC2426AB0C8C00152739 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4D07AC2826AB0C8E00152739 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D07AC2926AB0C8E00152739 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4D07AC4226AB0C8E00152739 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4D07AC4326AB0C8E00152739 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D07AC4526AB0C8E00152739 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3FB53633289145467AE2FDE /* Pods-OctoSearch.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y57C8JT3X2;
+				INFOPLIST_FILE = OctoSearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vividmindsoft.test.OctoSearch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4D07AC4626AB0C8E00152739 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBB5B5329CD1F3AC2C8AF856 /* Pods-OctoSearch.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y57C8JT3X2;
+				INFOPLIST_FILE = OctoSearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vividmindsoft.test.OctoSearch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4D07AC4826AB0C8E00152739 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8434F85306F9FDF93309A6AA /* Pods-OctoSearchTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y57C8JT3X2;
+				INFOPLIST_FILE = OctoSearchTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vividmindsoft.test.OctoSearchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OctoSearch.app/OctoSearch";
+			};
+			name = Debug;
+		};
+		4D07AC4926AB0C8E00152739 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 959BC9A9147CB48A62AFFE4D /* Pods-OctoSearchTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y57C8JT3X2;
+				INFOPLIST_FILE = OctoSearchTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vividmindsoft.test.OctoSearchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OctoSearch.app/OctoSearch";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D07AC1526AB0C8C00152739 /* Build configuration list for PBXProject "OctoSearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D07AC4226AB0C8E00152739 /* Debug */,
+				4D07AC4326AB0C8E00152739 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D07AC4426AB0C8E00152739 /* Build configuration list for PBXNativeTarget "OctoSearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D07AC4526AB0C8E00152739 /* Debug */,
+				4D07AC4626AB0C8E00152739 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D07AC4726AB0C8E00152739 /* Build configuration list for PBXNativeTarget "OctoSearchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D07AC4826AB0C8E00152739 /* Debug */,
+				4D07AC4926AB0C8E00152739 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4D07AC1226AB0C8C00152739 /* Project object */;
+}

@@ -1,0 +1,80 @@
+PODS:
+  - Alamofire (5.4.3)
+  - CocoaLumberjack/Core (3.5.3)
+  - CocoaLumberjack/Swift (3.5.3):
+    - CocoaLumberjack/Core
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
+    - Moya/Core
+    - RxSwift (~> 5.0)
+  - Nimble (9.2.0)
+  - Quick (4.0.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxFlow (2.9.0):
+    - RxCocoa (>= 5.1.1)
+    - RxSwift (>= 5.1.1)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.2)
+  - RxSwiftExt (5.1.1):
+    - RxSwiftExt/Core (= 5.1.1)
+    - RxSwiftExt/RxCocoa (= 5.1.1)
+  - RxSwiftExt/Core (5.1.1):
+    - RxSwift (~> 5.0)
+  - RxSwiftExt/RxCocoa (5.1.1):
+    - RxCocoa (~> 5.0)
+    - RxSwiftExt/Core
+  - RxTest (5.1.2):
+    - RxSwift (~> 5)
+  - SwiftGen (6.4.0)
+  - SwiftLint (0.43.1)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - Moya/RxSwift
+  - Nimble
+  - Quick
+  - RxFlow
+  - RxSwift
+  - RxSwiftExt
+  - RxTest
+  - SwiftGen
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CocoaLumberjack
+    - Moya
+    - Nimble
+    - Quick
+    - RxCocoa
+    - RxFlow
+    - RxRelay
+    - RxSwift
+    - RxSwiftExt
+    - RxTest
+    - SwiftGen
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxFlow: a7f993ba4791174d414509a0ec03bfeff530a826
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
+  RxSwiftExt: 0d2fd77523a169d1459be34961b996a194bdef0e
+  RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+
+PODFILE CHECKSUM: 290c233e7b02ff9064f2933436b7813a992f47ce
+
+COCOAPODS: 1.10.1
