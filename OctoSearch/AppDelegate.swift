@@ -4,44 +4,69 @@
 //
 
 import UIKit
+import RxSwift
 import RxFlow
+import CocoaLumberjack
 
-@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var coordinator = FlowCoordinator()
+    private let coordinator = FlowCoordinator()
+    private let appFlow = AppFlow()
+    private let disposeBag: DisposeBag = .init()
+
+    let dependencyManager: MainAssembler = {
+        let manager = MainAssembler.shared
+        let assembler: MainAssemblyProtocol = MainAssembly()
+        manager.create(with: assembler)
+        return manager
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        guard let window = self.window else { return false }
-
-        let appFlow = AppFlow()
-
-        Flows.use(
-            appFlow, when: .created) { root in
-            window.rootViewController = root
-            window.makeKeyAndVisible()
-        }
-
-        self.coordinator.coordinate(flow: appFlow, with: OneStepper(withSingleStep: AppStep.rootViewRequested))
+        setupLogging()
+        initiateFlow()
 
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
+    private func initiateFlow() {
+        coordinator.rx.willNavigate
+            .subscribe(onNext: { (flow, step) in
+                DDLogDebug("Will navigate to flow=\(flow) and step=\(step)")
+            })
+            .disposed(by: disposeBag)
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        coordinator.rx.didNavigate
+            .subscribe(onNext: { (flow, step) in
+                DDLogDebug("Did navigate to flow=\(flow) and step=\(step)")
+            })
+            .disposed(by: disposeBag)
+
+        Flows.use(
+            appFlow,
+            when: .created) { [weak self] root in
+            self?.window = UIWindow()
+            self?.window?.rootViewController = root
+            self?.window?.makeKeyAndVisible()
+        }
+
+        self.coordinator.coordinate(flow: appFlow, with: OneStepper(withSingleStep: AppStep.rootViewRequested))
     }
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    private func setupLogging() {
+        #if DEBUG
+        dynamicLogLevel = .debug
+        #else
+        dynamicLogLevel = .error
+        #endif
+
+        if let ttyLogger = DDTTYLogger.sharedInstance {
+            ttyLogger.logFormatter = LogFormatter()
+            DDLog.add(ttyLogger) // TTY = Xcode console
+        }
+        let osLogger = DDOSLogger.sharedInstance
+        osLogger.logFormatter = LogFormatter()
+        DDLog.add(osLogger)
     }
-
-
 }
 

@@ -34,6 +34,8 @@ class MainAssembly: MainAssemblyProtocol {
     let container: Container = Container()
     
     func assemble() {
-
+        container.register(SearchViewModelProtocol.self) { _ in
+            return SearchViewModel()
+        }.inObjectScope(.transient)
     }
 }

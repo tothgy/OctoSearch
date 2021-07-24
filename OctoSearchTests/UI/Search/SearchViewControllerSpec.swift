@@ -36,6 +36,20 @@ class SearchViewControllerSpec: QuickSpec {
             it("can be instantiated") {
                 expect(sut).toNot(beNil())
             }
+
+            context("when the view is loaded") {
+                beforeEach {
+                    sut.loadViewIfNeeded()
+                }
+
+                it("has a search bar") {
+                    expect(sut.searchBar).toNot(beNil())
+                }
+
+                it("has a table view for the search results") {
+                    expect(sut.tableView).toNot(beNil())
+                }
+            }
         }
     }
 }

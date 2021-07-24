@@ -46,7 +46,6 @@ DEPENDENCIES:
   - RxTest
   - SwiftGen
   - SwiftLint
-  - Swinject
   - Swinject (= 2.6.0)
   - SwinjectStoryboard (= 2.2.0)
 
@@ -85,6 +84,6 @@ SPEC CHECKSUMS:
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: 740fbe1bac57c1887e3df6bbf656db6ec6e60374
+PODFILE CHECKSUM: 69985de57d6591ea3b7b742984cc88589889f8c9
 
 COCOAPODS: 1.10.1

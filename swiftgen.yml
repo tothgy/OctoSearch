@@ -12,7 +12,7 @@ xcassets:
       output: OctoSearch/Generated/Assets.swift
 ib:
   inputs:
-  - OctoSearch/Search/Base.lproj/SearchViewController.storyboard
+  - OctoSearch/UI/Search/Base.lproj/SearchViewController.storyboard
   outputs:
   - templateName: scenes-swift5
     output: OctoSearch/Generated/StoryboardScenes.swift
