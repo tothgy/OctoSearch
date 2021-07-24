@@ -9,6 +9,7 @@ import Quick
 import RxSwift
 import Swinject
 import RxFlow
+import RxTest
 
 // swiftlint:disable file_length
 class AppFlowSpec: QuickSpec {
@@ -62,6 +63,14 @@ extension AppFlowSpec {
                 let instance = AppFlow()
                 return instance
             }.inObjectScope(.transient)
+
+            container.register(SearchViewModelProtocol.self) { _ in
+                return MockSearchViewModel()
+            }.inObjectScope(.transient)
+
+            container.register(SchedulerType.self) { _ in
+                return TestScheduler(initialClock: 0, resolution: 0.001)
+            }.inObjectScope(.container)
         }
     }
 }

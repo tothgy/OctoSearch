@@ -15,6 +15,9 @@ end
 
 target 'OctoSearchTests' do
   inherit! :search_paths
+  pod 'RxFlow'
+  pod 'Swinject', '2.6.0'
+  pod 'SwinjectStoryboard', '2.2.0'
   pod 'Nimble'
   pod 'Quick'
   pod 'RxTest'

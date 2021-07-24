@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import RxSwift
 import Swinject
 import SwinjectStoryboard
 
@@ -37,5 +38,9 @@ class MainAssembly: MainAssemblyProtocol {
         container.register(SearchViewModelProtocol.self) { _ in
             return SearchViewModel()
         }.inObjectScope(.transient)
+
+        container.register(SchedulerType.self) { _ in
+            return MainScheduler.instance
+        }.inObjectScope(.container)
     }
 }

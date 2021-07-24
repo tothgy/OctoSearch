@@ -11,6 +11,7 @@ import SwinjectStoryboard
 import UIKit
 import RxSwift
 import RxCocoa
+import RxTest
 
 // swiftlint:disable file_length function_body_length
 class SearchViewControllerSpec: QuickSpec {
@@ -19,13 +20,16 @@ class SearchViewControllerSpec: QuickSpec {
         describe("SearchViewController") {
             var sut: SearchViewController!
             var mockViewModel: MockSearchViewModel!
+            var testScheduler: TestScheduler!
             var disposeBag: DisposeBag!
 
             beforeEach {
                 MainAssembler.shared.create(with: TestAssembly())
                 let container = MainAssembler.shared.container
+
                 sut = container.get(SearchViewController.self)
                 mockViewModel = container.get(SearchViewModelProtocol.self) as? MockSearchViewModel
+                testScheduler = container.get(SchedulerType.self) as? TestScheduler
                 disposeBag = DisposeBag()
             }
             
@@ -50,6 +54,67 @@ class SearchViewControllerSpec: QuickSpec {
                     expect(sut.tableView).toNot(beNil())
                 }
             }
+
+            context("when the view model signals a list of cell models") {
+                beforeEach {
+                    sut.loadViewIfNeeded()
+                    mockViewModel.expectCellsToReturn([
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty())
+                    ])
+                }
+
+                it("shows a cell for each cell model") {
+                    expect(sut.tableView.numberOfSections).to(equal(1))
+                    expect(sut.tableView.numberOfRows(inSection: 0)).to(equal(1))
+                }
+
+                context("each row") {
+                    var cell: UITableViewCell!
+
+                    beforeEach {
+                        cell = sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                    }
+
+                    it("shows the repository icon") {
+                        expect(cell.imageView?.image).to(equal(Asset.repo24.image))
+                    }
+
+                    it("shows the title") {
+                        expect(cell.textLabel?.text).to(equal("Title"))
+                    }
+
+                    it("shows the subtitle") {
+                        expect(cell.detailTextLabel?.text).to(equal("Subtitle"))
+                    }
+                }
+            }
+
+            context("given that the user entered a search term into the search bar") {
+                context("and less than 600ms passed since the user finished typing") {
+                    it("does not request the view model to search") {
+                        sut.loadViewIfNeeded()
+
+                        sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "a")
+
+                        testScheduler.advanceTo(590)
+
+                        expect(mockViewModel.invokedSearchCount).to(equal(0))
+                    }
+                }
+
+                context("and more than 600ms passed since the user finished typing") {
+                    it("requests the view model to search with the given search term") {
+                        sut.loadViewIfNeeded()
+                        sut.searchBar.text = "a"
+                        sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "foo")
+
+                        testScheduler.advanceTo(600)
+
+                        expect(mockViewModel.invokedSearchCount).to(equal(1))
+                        expect(mockViewModel.invokedSearchParameters?.searchText).to(equal("a"))
+                    }
+                }
+            }
         }
     }
 }
@@ -66,18 +131,12 @@ extension SearchViewControllerSpec {
             }.inObjectScope(.transient)
 
             container.register(SearchViewModelProtocol.self) { _ in
-                let instance = MockSearchViewModel()
-                return instance
+                return MockSearchViewModel()
             }.inObjectScope(.container)
-        }
-    }
-    
-    class MockSearchViewModel: SearchViewModelProtocol {
-        
-        private var disposeBag = DisposeBag()
-        
-        init() {
-            
+
+            container.register(SchedulerType.self) { _ in
+                return TestScheduler(initialClock: 0, resolution: 0.001)
+            }.inObjectScope(.container)
         }
     }
 }

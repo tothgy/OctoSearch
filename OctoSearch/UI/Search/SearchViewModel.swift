@@ -9,7 +9,10 @@ protocol SearchViewModelProtocol {
     // MARK: - Input
     
     // MARK: - Output
-    
+
+    var cells$: Observable<[RepositoryCellModel]> { get }
+
+    func search(_ searchText: String) -> Completable
 }
 
 class SearchViewModel: SearchViewModelProtocol {
@@ -18,10 +21,16 @@ class SearchViewModel: SearchViewModelProtocol {
     
     // MARK: - Output
 
+    var cells$: Observable<[RepositoryCellModel]> = .never()
+
     // MARK: - Internal
 
     init() {
         
+    }
+
+    func search(_ searchText: String) -> Completable {
+        return .never()
     }
 }
 
