@@ -32,7 +32,6 @@ class SearchServiceSpec: QuickSpec {
 
             describe("search") {
                 it("makes a network request with the given search text") {
-
                     sut.search("repo").subscribe().disposed(by: disposeBag)
 
                     expect(searchParameterQ).to(equal("repo"))
@@ -47,7 +46,7 @@ class SearchServiceSpec: QuickSpec {
                         let successExpectation = QuickSpec.current.expectation(description: "success")
 
                         sut.search("repo")
-                            .subscribe(onSuccess: { (repositories: [Repository]) in
+                            .subscribe(onSuccess: { (repositories: [Repository], _) in
                                 successExpectation.fulfill()
                                 expect(repositories).to(haveCount(1))
                             })
@@ -106,6 +105,8 @@ extension SearchServiceSpec {
             switch target {
             case let .searchRepositories(query):
                 searchParameterQ = query
+                sampleResponseClosure = { expectedSearchResponse }
+            case .nextSearchPage:
                 sampleResponseClosure = { expectedSearchResponse }
             }
 

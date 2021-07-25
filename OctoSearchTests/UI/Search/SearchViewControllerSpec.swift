@@ -179,6 +179,39 @@ class SearchViewControllerSpec: QuickSpec {
                 }
             }
 
+            context("""
+                given that the view model signalled a list of cell models \
+                and the user scrolls to the bottom of the result list
+                """) {
+                it("requests the view model to load the next result page") {
+                    sut.loadViewIfNeeded()
+
+                    mockViewModel.expectCellsToReturn([
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty()),
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty()),
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty()),
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty()),
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty()),
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty()),
+                        RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty())
+                    ])
+
+                    subscribe(
+                        to: mockViewModel.loadNextPageRelay.asObservable(),
+                        trigger: {
+                            sut.tableView.contentOffset = .init(x: 0, y: sut.tableView.contentSize.height)
+                            waitUntil { (done) in
+                                DispatchQueue.main.async {
+                                    done()
+                                }
+                            }
+                        },
+                        verify: {(emissions: [()]) in
+                            expect(emissions).to(haveCount(1))
+                        }).disposed(by: disposeBag)
+                }
+            }
+
             context("when the view models signals to show the loading activity indicator") {
                 it("shows the activity indicator") {
                     sut.loadViewIfNeeded()
@@ -194,6 +227,26 @@ class SearchViewControllerSpec: QuickSpec {
                     mockViewModel.expectShowLoadingToReturn(false)
 
                     expect(sut.activityIndicator.isAnimating).to(beFalse())
+                }
+            }
+
+            context("""
+                given that there is text in the search bar input field \
+                and the user clears the search bar input text
+                """) {
+                it("requests the view model to clear the search results") {
+                    sut.loadViewIfNeeded()
+                    sut.searchBar.text = "a"
+
+                    subscribe(
+                        to: mockViewModel.clearResultsRelay.asObservable(),
+                        trigger: {
+                            sut.searchBar.text = ""
+                            sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "")
+                        },
+                        verify: {(emissions: [()]) in
+                            expect(emissions).to(haveCount(1))
+                        }).disposed(by: disposeBag)
                 }
             }
         }

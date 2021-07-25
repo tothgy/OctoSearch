@@ -65,9 +65,10 @@ class SearchViewModelSpec: QuickSpec {
                                 htmlUrl: "https://github.com/repo",
                                 repositoryDescription: "Repo description")
 
-                            mockSearchService.stubbedSearchResult = .just([
-                                expectedRepository
-                            ])
+                            mockSearchService.stubbedSearchResult = .just((
+                                [expectedRepository],
+                                URL(string: "")
+                            ))
                         }
 
                         it("""
@@ -149,6 +150,126 @@ class SearchViewModelSpec: QuickSpec {
                         }
                     }
                 }
+
+                context("""
+                    given that a search text has been published \
+                    and the Search Service returned and array of Repositories and an URL of the next result page \
+                    and loading the next page is requested
+                    """) {
+                    beforeEach {
+                        sut.cells$.subscribe().disposed(by: disposeBag)
+
+                        let expectedRepository: Repository = .init(
+                            id: 1,
+                            name: "Repo-1",
+                            fullName: "Repository 1",
+                            htmlUrl: "https://github.com/repo",
+                            repositoryDescription: "Repo description")
+
+                        mockSearchService.stubbedSearchResult = .just((
+                            [expectedRepository],
+                            URL(string: "https://github.com/repos-2")
+                        ))
+
+                        sut.searchText.accept("repo")
+                    }
+
+                    context("and the Search Services returned a list of Repositories") {
+                        var expectedRepository: Repository!
+
+                        beforeEach {
+                            expectedRepository = .init(
+                                id: 1,
+                                name: "Repo-2",
+                                fullName: "Repository 2",
+                                htmlUrl: "https://github.com/repo2",
+                                repositoryDescription: "Repo 2 description")
+
+                            mockSearchService.stubbedNextSearchPageResult = .just((
+                                [expectedRepository],
+                                URL(string: "")
+                            ))
+                        }
+
+                        it("""
+                        emits a list of cell models where \
+                        each cell model's title is the corresponding Repository's full name
+                        """) {
+                            subscribe(
+                                to: sut.cells$,
+                                trigger: {
+                                    sut.loadNextPageRelay.accept(())
+                                },
+                                verify: {(emissions: [[RepositoryCellModel]]) in
+                                    expect(emissions).to(haveCount(2))
+                                    let cellModels = emissions.last!
+                                    expect(cellModels).to(haveCount(2))
+                                    let cellModel = cellModels.last!
+                                    expect(cellModel.title).to(equal(expectedRepository.fullName))
+                                }).disposed(by: disposeBag)
+                        }
+
+                        it("""
+                        emits a list of cell models where \
+                        each cell model's subtitle is the corresponding Repository's description
+                        """) {
+                            subscribe(
+                                to: sut.cells$,
+                                trigger: {
+                                    sut.loadNextPageRelay.accept(())
+                                },
+                                verify: {(emissions: [[RepositoryCellModel]]) in
+                                    expect(emissions).to(haveCount(2))
+                                    let cellModels = emissions.last!
+                                    expect(cellModels).to(haveCount(2))
+                                    let cellModel = cellModels.last!
+                                    expect(cellModel.subtitle).to(equal(expectedRepository.repositoryDescription))
+                                }).disposed(by: disposeBag)
+                        }
+
+                        it("""
+                        emits a list of cell models where \
+                        each cell model's selection completable requests to show a web view with the correspoding \
+                        Repository's HTML URL on subscribe
+                        """) {
+                            var selectionCompletable: Completable!
+
+                            subscribe(
+                                to: sut.cells$,
+                                trigger: {
+                                    sut.loadNextPageRelay.accept(())
+                                },
+                                verify: {(emissions: [[RepositoryCellModel]]) in
+                                    expect(emissions).to(haveCount(2))
+                                    let cellModels = emissions.last!
+                                    expect(cellModels).to(haveCount(2))
+                                    let cellModel = cellModels.last!
+                                    selectionCompletable = cellModel.selectionCompletable
+                                }).disposed(by: disposeBag)
+
+                            subscribe(
+                                to: sut.steps.asObservable(),
+                                trigger: {
+                                    selectionCompletable.subscribe().disposed(by: disposeBag)
+                                },
+                                verify: {(emissions: [Step]) in
+                                    expect(emissions).to(haveCount(1))
+
+                                    guard
+                                        let appStep = emissions.last as? AppStep,
+                                        case let AppStep.webViewRequested(url) = appStep,
+                                        url.absoluteString == "https://github.com/repo2"
+                                    else {
+                                        fail("""
+                                        Expected to get AppStep.webViewRequested("https://github.com/repo") \
+                                        got: \(String(describing: emissions.last))
+                                        """)
+                                        return
+                                    }
+                                }).disposed(by: disposeBag)
+                        }
+                    }
+                }
             }
 
             describe("showLoading$") {
@@ -174,7 +295,7 @@ class SearchViewModelSpec: QuickSpec {
 
                     context("and the search request returns successfully") {
                         beforeEach {
-                            mockSearchService.stubbedSearchResult = .just([])
+                            mockSearchService.stubbedSearchResult = .just(([], URL(string: "")))
                         }
 
                         it("emits 'false'") {
@@ -260,7 +381,7 @@ class SearchViewModelSpec: QuickSpec {
                 it("continues listening to search requests") {
                     sut.searchText.accept("a")
 
-                    mockSearchService.stubbedSearchResult = .just([])
+                    mockSearchService.stubbedSearchResult = .just(([], URL(string: "")))
 
                     sut.searchText.accept("aa")
 
