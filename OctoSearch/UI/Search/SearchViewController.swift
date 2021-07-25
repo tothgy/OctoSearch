@@ -54,6 +54,13 @@ class SearchViewController: UIViewController {
                     return cell
                 })
             .disposed(by: disposeBag)
+
+        tableView.rx.modelSelected(RepositoryCellModel.self)
+            .flatMap({ (selectedCellModel: RepositoryCellModel) -> Completable in
+                return selectedCellModel.selectionCompletable
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
     }
 
     private func bindToViewModel() {

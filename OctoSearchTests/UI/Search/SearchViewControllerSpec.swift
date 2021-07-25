@@ -115,6 +115,30 @@ class SearchViewControllerSpec: QuickSpec {
                     }
                 }
             }
+
+            context("""
+                given that the view model signalled a list of cell models \
+                and the user taps on a row
+                """) {
+                it("subscribes to the selection observable in the corresponding cell model") {
+                    sut.loadViewIfNeeded()
+                    let selectionExpectation = QuickSpec.current.expectation(description: "selection")
+                    mockViewModel.expectCellsToReturn([
+                        RepositoryCellModel(
+                            title: "Title",
+                            subtitle: "Subtitle",
+                            selectionCompletable: .create(subscribe: { (completable) -> Disposable in
+                                selectionExpectation.fulfill()
+                                completable(.completed)
+                                return Disposables.create()
+                            }))
+                    ])
+
+                    sut.tableView.delegate?.tableView?(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+
+                    QuickSpec.current.waitForExpectations(timeout: 1)
+                }
+            }
         }
     }
 }
