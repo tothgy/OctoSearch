@@ -7,8 +7,9 @@ import UIKit
 import CocoaLumberjack
 import RxSwift
 import RxCocoa
+import RxFlow
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, HasStepper {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -17,6 +18,10 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModelProtocol
     @Inject
     var typingScheduler: SchedulerType
+
+    var stepper: Stepper {
+        return viewModel.stepper
+    }
 
     private let disposeBag = DisposeBag()
 
@@ -56,6 +61,11 @@ class SearchViewController: UIViewController {
             .disposed(by: disposeBag)
 
         tableView.rx.modelSelected(RepositoryCellModel.self)
+            .do(onNext: { [weak self] _ in
+                if let selectedIndexPath = self?.tableView.indexPathForSelectedRow {
+                    self?.tableView.deselectRow(at: selectedIndexPath, animated: true)
+                }
+            })
             .flatMap({ (selectedCellModel: RepositoryCellModel) -> Completable in
                 return selectedCellModel.selectionCompletable
             })

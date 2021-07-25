@@ -7,6 +7,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxFlow
 
 class MockSearchViewModelBase: SearchViewModelProtocol {
 
@@ -29,6 +30,16 @@ class MockSearchViewModelBase: SearchViewModelProtocol {
         invokedCellsGetterCount += 1
         return stubbedCells
     }
+
+    var invokedStepperGetter = false
+    var invokedStepperGetterCount = 0
+    var stubbedStepper: Stepper!
+
+    var stepper: Stepper {
+        invokedStepperGetter = true
+        invokedStepperGetterCount += 1
+        return stubbedStepper
+    }
 }
 
 class MockSearchViewModel: MockSearchViewModelBase {
@@ -36,6 +47,7 @@ class MockSearchViewModel: MockSearchViewModelBase {
         super.init()
         stubbedSearchText = .init()
         stubbedCells = cellsSubject
+        stubbedStepper = DefaultStepper()
     }
 
     private let cellsSubject = ReplaySubject<[RepositoryCellModel]>.create(bufferSize: 1)
