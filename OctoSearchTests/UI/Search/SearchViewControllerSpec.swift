@@ -125,6 +125,30 @@ class SearchViewControllerSpec: QuickSpec {
                             }).disposed(by: disposeBag)
                     }
                 }
+
+                context("and then entered the same text again and more than 600ms passed since the second input") {
+                    it("does not request the view model to search") {
+                        sut.loadViewIfNeeded()
+
+                        subscribe(
+                            to: mockViewModel.searchText.asObservable(),
+                            trigger: {
+                                sut.searchBar.text = "a"
+                                sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "a")
+
+                                testScheduler.advanceTo(600)
+
+                                sut.searchBar.text = "a"
+                                sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "a")
+
+                                testScheduler.advanceTo(1200)
+                            },
+                            verify: {(emissions: [String]) in
+                                expect(emissions).to(haveCount(1))
+                                expect(emissions.last).to(equal("a"))
+                            }).disposed(by: disposeBag)
+                    }
+                }
             }
 
             context("""
