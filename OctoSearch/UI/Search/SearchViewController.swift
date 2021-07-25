@@ -14,6 +14,7 @@ class SearchViewController: UIViewController, HasStepper {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var emptyLabel: UILabel!
 
     @Inject
     var viewModel: SearchViewModelProtocol
@@ -42,6 +43,7 @@ class SearchViewController: UIViewController, HasStepper {
 
     private func setupUI() {
         setupNavigationBar()
+        setupSearchBar()
         setupTableView()
     }
 
@@ -77,6 +79,29 @@ class SearchViewController: UIViewController, HasStepper {
         viewModel.showLoading$.asDriver(onErrorJustReturn: false)
             .drive(activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
+
+        Observable.combineLatest(
+            viewModel.cells$.startWith([]),
+            viewModel.searchText.startWith("").asObservable(),
+            viewModel.showLoading$.startWith(false),
+            resultSelector: { (cells, searchText, isLoading) -> (Bool, Bool, Bool) in
+                return (cells.isEmpty, searchText.isEmpty, isLoading)
+            })
+            .asDriver(onErrorJustReturn: (false, false, false))
+            .drive(onNext: { [weak self] (isSearchListEmpty, isSearchFieldEmpty, isLoading) in
+                if isLoading {
+                    self?.emptyLabel.isHidden = true
+                } else if isSearchListEmpty && isSearchFieldEmpty {
+                    self?.emptyLabel.text = L10n.Search.Empty.message
+                    self?.emptyLabel.isHidden = false
+                } else if isSearchListEmpty && !isSearchFieldEmpty {
+                    self?.emptyLabel.text = L10n.Search.Empty.noResult
+                    self?.emptyLabel.isHidden = false
+                } else {
+                    self?.emptyLabel.isHidden = true
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     private func bindToViewModel() {
@@ -88,8 +113,7 @@ class SearchViewController: UIViewController, HasStepper {
 
         searchBar.rx.text.orEmpty
             .filter({ $0.isEmpty })
-            .map({ _ in () })
-            .bind(to: viewModel.clearResultsRelay)
+            .bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
 
         tableView.rx.contentOffset
@@ -107,8 +131,13 @@ class SearchViewController: UIViewController, HasStepper {
         title = L10n.Search.title
     }
 
+    private func setupSearchBar() {
+        searchBar.placeholder = L10n.Search.SearchBar.placeholder
+    }
+
     private func setupTableView() {
         tableView.register(RepositoryCell.self, forCellReuseIdentifier: RepositoryCell.reuseIdentifier)
+        tableView.backgroundView = emptyLabel
     }
 }
 

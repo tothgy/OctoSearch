@@ -54,8 +54,17 @@ class SearchViewControllerSpec: QuickSpec {
                     expect(sut.searchBar).toNot(beNil())
                 }
 
+                it("shows the placeholder text in the search bar") {
+                    expect(sut.searchBar.placeholder).to(equal("Search GitHub"))
+                }
+
                 it("has a table view for the search results") {
                     expect(sut.tableView).toNot(beNil())
+                }
+
+                it("has an empty message label") {
+                    expect(sut.emptyLabel).toNot(beNil())
+                    expect(sut.tableView.backgroundView).to(equal(sut.emptyLabel))
                 }
             }
 
@@ -65,6 +74,10 @@ class SearchViewControllerSpec: QuickSpec {
                     mockViewModel.expectCellsToReturn([
                         RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty())
                     ])
+                }
+
+                it("hides the empty message") {
+                    expect(sut.emptyLabel.isHidden).to(beTrue())
                 }
 
                 it("shows a cell for each cell model") {
@@ -93,9 +106,27 @@ class SearchViewControllerSpec: QuickSpec {
                 }
             }
 
+            context("""
+                given that the user enters text into the search bar \
+                and the loading has been finished \
+                and the view model signals an empty list of cell models
+                """) {
+                it("shows the no results empty message") {
+                    sut.loadViewIfNeeded()
+                    sut.searchBar.text = "a"
+                    sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "a")
+                    testScheduler.advanceTo(600)
+                    mockViewModel.expectShowLoadingToReturn(false)
+                    mockViewModel.expectCellsToReturn([])
+
+                    expect(sut.emptyLabel.isHidden).to(beFalse())
+                    expect(sut.emptyLabel.text).to(equal("We couldn’t find any repositories matching the given term"))
+                }
+            }
+
             context("given that the user entered a search term into the search bar") {
                 context("and less than 600ms passed since the user finished typing") {
-                    it("does not request the view model to search") {
+                    it("does not update the view model's search text yet") {
                         sut.loadViewIfNeeded()
 
                         subscribe(
@@ -106,13 +137,13 @@ class SearchViewControllerSpec: QuickSpec {
                                 testScheduler.advanceTo(590)
                             },
                             verify: {(emissions: [String]) in
-                                expect(emissions).to(beEmpty())
+                                expect(emissions.last).to(beEmpty())
                             }).disposed(by: disposeBag)
                     }
                 }
 
                 context("and more than 600ms passed since the user finished typing") {
-                    it("requests the view model to search with the given search term") {
+                    it("updates the view model's search terms") {
                         sut.loadViewIfNeeded()
 
                         subscribe(
@@ -213,11 +244,17 @@ class SearchViewControllerSpec: QuickSpec {
             }
 
             context("when the view models signals to show the loading activity indicator") {
-                it("shows the activity indicator") {
+                beforeEach {
                     sut.loadViewIfNeeded()
                     mockViewModel.expectShowLoadingToReturn(true)
+                }
 
+                it("shows the activity indicator") {
                     expect(sut.activityIndicator.isAnimating).to(beTrue())
+                }
+
+                it("hides the empty message") {
+                    expect(sut.emptyLabel.isHidden).to(beTrue())
                 }
             }
 
@@ -234,18 +271,18 @@ class SearchViewControllerSpec: QuickSpec {
                 given that there is text in the search bar input field \
                 and the user clears the search bar input text
                 """) {
-                it("requests the view model to clear the search results") {
+                it("updates the view model's search text immediately") {
                     sut.loadViewIfNeeded()
                     sut.searchBar.text = "a"
 
                     subscribe(
-                        to: mockViewModel.clearResultsRelay.asObservable(),
+                        to: mockViewModel.searchText.asObservable(),
                         trigger: {
                             sut.searchBar.text = ""
                             sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "")
                         },
-                        verify: {(emissions: [()]) in
-                            expect(emissions).to(haveCount(1))
+                        verify: {(emissions: [String]) in
+                            expect(emissions.last).to(beEmpty())
                         }).disposed(by: disposeBag)
                 }
             }

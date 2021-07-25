@@ -31,16 +31,6 @@ class MockSearchViewModelBase: SearchViewModelProtocol {
         return stubbedLoadNextPageRelay
     }
 
-    var invokedClearResultsRelayGetter = false
-    var invokedClearResultsRelayGetterCount = 0
-    var stubbedClearResultsRelay: PublishRelay<()>!
-
-    var clearResultsRelay: PublishRelay<()> {
-        invokedClearResultsRelayGetter = true
-        invokedClearResultsRelayGetterCount += 1
-        return stubbedClearResultsRelay
-    }
-
     var invokedCellsGetter = false
     var invokedCellsGetterCount = 0
     var stubbedCells: Observable<[RepositoryCellModel]>!
@@ -77,7 +67,6 @@ class MockSearchViewModel: MockSearchViewModelBase {
         super.init()
         stubbedSearchText = .init()
         stubbedLoadNextPageRelay = .init()
-        stubbedClearResultsRelay = .init()
         stubbedCells = cellsSubject
         stubbedShowLoading = showLoadingSubject
         stubbedStepper = DefaultStepper()
