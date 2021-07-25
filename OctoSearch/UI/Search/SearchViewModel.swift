@@ -15,6 +15,7 @@ protocol SearchViewModelProtocol: HasStepper {
     // MARK: - Output
 
     var cells$: Observable<[RepositoryCellModel]> { get }
+    var showLoading$: Observable<Bool> { get }
 }
 
 class SearchViewModel: SearchViewModelProtocol, Stepper {
@@ -26,6 +27,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
     // MARK: - Output
 
     var cells$: Observable<[RepositoryCellModel]> = .never()
+    var showLoading$: Observable<Bool> = .never()
 
     // MARK: - Internal
 
@@ -38,12 +40,25 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
 
     var steps: PublishRelay<Step> = .init()
 
+    private let showLoadingRelay: BehaviorRelay<Bool> = .init(value: false)
+
     init() {
+        showLoading$ = showLoadingRelay.asObservable()
+
         cells$ = searchText
             .filter({ !$0.isEmpty })
-            .flatMapLatest({ [weak self] (searchText: String) -> Single<[Repository]> in
+
+            .do(onNext: { [weak self] _ in
+                self?.showLoadingRelay.accept(true)
+            })
+            .flatMapLatest({ [weak self] (searchText: String) -> Observable<[Repository]> in
                 guard let self = self else { return .just([]) }
-                return self.searchService.search(searchText)
+                return Observable<[Repository]>.just([])
+                    .concat(
+                        self.searchService.search(searchText)
+                            .do(onSuccess: { [weak self] _ in
+                                self?.showLoadingRelay.accept(false)
+                            }))
             })
             .catchError({ [weak self] (error) -> Observable<[Repository]> in
                 let alertDetails: AlertDetails = .init(
@@ -54,6 +69,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
                         .okAction
                     ])
 
+                self?.showLoadingRelay.accept(false)
                 self?.steps.accept(AppStep.alert(alertDetails))
                 return .error(error)
             })

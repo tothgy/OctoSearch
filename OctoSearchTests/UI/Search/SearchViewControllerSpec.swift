@@ -178,6 +178,24 @@ class SearchViewControllerSpec: QuickSpec {
                     QuickSpec.current.waitForExpectations(timeout: 1)
                 }
             }
+
+            context("when the view models signals to show the loading activity indicator") {
+                it("shows the activity indicator") {
+                    sut.loadViewIfNeeded()
+                    mockViewModel.expectShowLoadingToReturn(true)
+
+                    expect(sut.activityIndicator.isAnimating).to(beTrue())
+                }
+            }
+
+            context("when the view models signals to hide the loading activity indicator") {
+                it("hides the activity indicator") {
+                    sut.loadViewIfNeeded()
+                    mockViewModel.expectShowLoadingToReturn(false)
+
+                    expect(sut.activityIndicator.isAnimating).to(beFalse())
+                }
+            }
         }
     }
 }
