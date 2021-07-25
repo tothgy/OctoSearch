@@ -18,6 +18,7 @@ target 'OctoSearchTests' do
   pod 'RxFlow'
   pod 'Swinject', '2.6.0'
   pod 'SwinjectStoryboard', '2.2.0'
+  pod 'Moya/RxSwift'
   pod 'Nimble'
   pod 'Quick'
   pod 'RxTest'

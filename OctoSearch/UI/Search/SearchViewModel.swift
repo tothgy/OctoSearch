@@ -33,6 +33,7 @@ class SearchViewModel: SearchViewModelProtocol {
 
     init() {
         cells$ = searchText
+            .filter({ !$0.isEmpty })
             .flatMapLatest({ [weak self] (searchText: String) -> Single<[Repository]> in
                 guard let self = self else { return .just([]) }
                 return self.searchService.search(searchText)

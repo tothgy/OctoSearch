@@ -37,7 +37,12 @@
 		4D90D62226ACAC36001586C3 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90D62126ACAC36001586C3 /* UIKitExtensions.swift */; };
 		4DAD9C6A26AD3B69000A235B /* SearchViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C6926AD3B69000A235B /* SearchViewModelSpec.swift */; };
 		4DAD9C6F26AD3BE5000A235B /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C6E26AD3BE5000A235B /* SearchService.swift */; };
-		4DAD9C7C26AD3CD9000A235B /* MockSearchServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C7B26AD3CD9000A235B /* MockSearchServiceSpec.swift */; };
+		4DAD9C7C26AD3CD9000A235B /* MockSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C7B26AD3CD9000A235B /* MockSearchService.swift */; };
+		4DAD9C8826AD4931000A235B /* SearchServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C8726AD4931000A235B /* SearchServiceSpec.swift */; };
+		4DAD9C8D26AD4A3A000A235B /* GitHubApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C8C26AD4A3A000A235B /* GitHubApi.swift */; };
+		4DAD9C9A26AD571B000A235B /* MockMultiTargetApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C9026AD56C4000A235B /* MockMultiTargetApiProvider.swift */; };
+		4DAD9C9E26AD574B000A235B /* StubSearchSucessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9C9D26AD574B000A235B /* StubSearchSucessResponse.swift */; };
+		4DAD9CB926AD6372000A235B /* RepositorySearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD9CB826AD6372000A235B /* RepositorySearchResult.swift */; };
 		66E3602D36A55DF5DC3C3234 /* Pods_OctoSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631ECFA86DC8C70373348BA /* Pods_OctoSearch.framework */; };
 		8E8508622078D4AD21257AA3 /* Pods_OctoSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBEF164E17DE7BADECBDBAC /* Pods_OctoSearchTests.framework */; };
 /* End PBXBuildFile section */
@@ -87,7 +92,12 @@
 		4D90D62126ACAC36001586C3 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		4DAD9C6926AD3B69000A235B /* SearchViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelSpec.swift; sourceTree = "<group>"; };
 		4DAD9C6E26AD3BE5000A235B /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
-		4DAD9C7B26AD3CD9000A235B /* MockSearchServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchServiceSpec.swift; sourceTree = "<group>"; };
+		4DAD9C7B26AD3CD9000A235B /* MockSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchService.swift; sourceTree = "<group>"; };
+		4DAD9C8726AD4931000A235B /* SearchServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceSpec.swift; sourceTree = "<group>"; };
+		4DAD9C8C26AD4A3A000A235B /* GitHubApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubApi.swift; sourceTree = "<group>"; };
+		4DAD9C9026AD56C4000A235B /* MockMultiTargetApiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMultiTargetApiProvider.swift; sourceTree = "<group>"; };
+		4DAD9C9D26AD574B000A235B /* StubSearchSucessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubSearchSucessResponse.swift; sourceTree = "<group>"; };
+		4DAD9CB826AD6372000A235B /* RepositorySearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchResult.swift; sourceTree = "<group>"; };
 		7631ECFA86DC8C70373348BA /* Pods_OctoSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OctoSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8434F85306F9FDF93309A6AA /* Pods-OctoSearchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoSearchTests.debug.xcconfig"; path = "Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		959BC9A9147CB48A62AFFE4D /* Pods-OctoSearchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoSearchTests.release.xcconfig"; path = "Target Support Files/Pods-OctoSearchTests/Pods-OctoSearchTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +185,7 @@
 				4D2D21EB26AC582100F9C822 /* Test */,
 				4D2D21DE26AC56CC00F9C822 /* Flow */,
 				4D35F55926AB5742001A0524 /* UI */,
+				4DAD9C9426AD56D9000A235B /* Model */,
 				4DAD9C7A26AD3CBF000A235B /* Service */,
 				4D07AC3626AB0C8E00152739 /* Info.plist */,
 			);
@@ -292,7 +303,9 @@
 		4D90D5DD26AC7D94001586C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4DAD9C8B26AD4A2A000A235B /* GitHubApi */,
 				4D90D5DE26AC7D9F001586C3 /* Repository.swift */,
+				4DAD9CB826AD6372000A235B /* RepositorySearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,9 +338,35 @@
 		4DAD9C7A26AD3CBF000A235B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				4DAD9C7B26AD3CD9000A235B /* MockSearchServiceSpec.swift */,
+				4DAD9C7B26AD3CD9000A235B /* MockSearchService.swift */,
+				4DAD9C8726AD4931000A235B /* SearchServiceSpec.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		4DAD9C8B26AD4A2A000A235B /* GitHubApi */ = {
+			isa = PBXGroup;
+			children = (
+				4DAD9C8C26AD4A3A000A235B /* GitHubApi.swift */,
+			);
+			path = GitHubApi;
+			sourceTree = "<group>";
+		};
+		4DAD9C9426AD56D9000A235B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4DAD9C9526AD56DE000A235B /* GitHubApi */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4DAD9C9526AD56DE000A235B /* GitHubApi */ = {
+			isa = PBXGroup;
+			children = (
+				4DAD9C9026AD56C4000A235B /* MockMultiTargetApiProvider.swift */,
+				4DAD9C9D26AD574B000A235B /* StubSearchSucessResponse.swift */,
+			);
+			path = GitHubApi;
 			sourceTree = "<group>";
 		};
 		8555DE7C96398AA883AB2078 /* Frameworks */ = {
@@ -548,6 +587,7 @@
 				4D35F48926AB4799001A0524 /* Inject.swift in Sources */,
 				4D2D22DE26AC675900F9C822 /* main.swift in Sources */,
 				4D90D62226ACAC36001586C3 /* UIKitExtensions.swift in Sources */,
+				4DAD9C8D26AD4A3A000A235B /* GitHubApi.swift in Sources */,
 				4D35F52826AB5594001A0524 /* StoryboardSegues.swift in Sources */,
 				4D90D54A26AC6D96001586C3 /* LogFormatter.swift in Sources */,
 				4D35F52926AB5594001A0524 /* Assets.swift in Sources */,
@@ -560,6 +600,7 @@
 				4D07AC2226AB0C8C00152739 /* ViewController.swift in Sources */,
 				4DAD9C6F26AD3BE5000A235B /* SearchService.swift in Sources */,
 				4D90D5DF26AC7D9F001586C3 /* Repository.swift in Sources */,
+				4DAD9CB926AD6372000A235B /* RepositorySearchResult.swift in Sources */,
 				4D90D61D26ACAB7E001586C3 /* RepositoryCell.swift in Sources */,
 				4D35F51626AB5462001A0524 /* SearchViewModel.swift in Sources */,
 				4D35F46A26AB1E89001A0524 /* AppFlow.swift in Sources */,
@@ -573,10 +614,13 @@
 			files = (
 				4D2D21E026AC56E700F9C822 /* AppFlowSpec.swift in Sources */,
 				4D35F4E226AB5050001A0524 /* SearchViewControllerSpec.swift in Sources */,
-				4DAD9C7C26AD3CD9000A235B /* MockSearchServiceSpec.swift in Sources */,
+				4DAD9C7C26AD3CD9000A235B /* MockSearchService.swift in Sources */,
 				4D2D21E626AC57A900F9C822 /* TestStepper.swift in Sources */,
+				4DAD9C8826AD4931000A235B /* SearchServiceSpec.swift in Sources */,
 				4D90D61026AC8764001586C3 /* MockSearchViewModel.swift in Sources */,
+				4DAD9C9E26AD574B000A235B /* StubSearchSucessResponse.swift in Sources */,
 				4D2D21F026AC582100F9C822 /* TestHelpers.swift in Sources */,
+				4DAD9C9A26AD571B000A235B /* MockMultiTargetApiProvider.swift in Sources */,
 				4DAD9C6A26AD3B69000A235B /* SearchViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

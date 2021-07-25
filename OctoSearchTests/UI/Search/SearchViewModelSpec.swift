@@ -43,7 +43,7 @@ class SearchViewModelSpec: QuickSpec {
 
                     beforeEach {
                         expectedRepository = .init(
-                            id: "1",
+                            id: 1,
                             name: "Repo-1",
                             fullName: "Repository 1",
                             htmlUrl: "https://github.com/repo",
@@ -89,6 +89,15 @@ class SearchViewModelSpec: QuickSpec {
                                 expect(cellModel.subtitle).to(equal(expectedRepository.repositoryDescription))
                             }).disposed(by: disposeBag)
                     }
+                }
+            }
+
+            context("given that an empty string has been published on the search text") {
+                it("does not request the Search Service to search") {
+                    sut.cells$.subscribe().disposed(by: disposeBag)
+                    sut.searchText.accept("")
+
+                    expect(mockSearchService.invokedSearchCount).to(equal(0))
                 }
             }
         }
