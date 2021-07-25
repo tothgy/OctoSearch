@@ -40,6 +40,7 @@ class SearchViewController: UIViewController, HasStepper {
     // MARK: - Private
 
     private func setupUI() {
+        setupNavigationBar()
         setupTableView()
     }
 
@@ -79,6 +80,10 @@ class SearchViewController: UIViewController, HasStepper {
             .debounce(.milliseconds(600), scheduler: typingScheduler)
             .bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
+    }
+
+    private func setupNavigationBar() {
+        title = L10n.Search.title
     }
 
     private func setupTableView() {

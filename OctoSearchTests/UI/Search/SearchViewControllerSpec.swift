@@ -46,6 +46,10 @@ class SearchViewControllerSpec: QuickSpec {
                     sut.loadViewIfNeeded()
                 }
 
+                it("shows the title") {
+                    expect(sut.title).to(equal("GitHub repositories"))
+                }
+
                 it("has a search bar") {
                     expect(sut.searchBar).toNot(beNil())
                 }
