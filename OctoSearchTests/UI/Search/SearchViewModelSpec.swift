@@ -43,7 +43,7 @@ class SearchViewModelSpec: QuickSpec {
 
                     beforeEach {
                         expectedRepository = .init(
-                            id: "1",
+                            id: 1,
                             name: "Repo-1",
                             fullName: "Repository 1",
                             htmlUrl: "https://github.com/repo",

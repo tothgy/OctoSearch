@@ -7,6 +7,7 @@ import Foundation
 import RxSwift
 import Swinject
 import SwinjectStoryboard
+import Moya
 
 class MainAssembler {
     
@@ -46,5 +47,10 @@ class MainAssembly: MainAssemblyProtocol {
         container.register(SearchServiceProtocol.self) { _ in
             return SearchService()
         }.inObjectScope(.transient)
+
+        container.register(MoyaProvider<GitHubApi>.self) { _ in
+            return MoyaProvider<GitHubApi>(
+                plugins: [NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration(logOptions: .verbose))])
+        }.inObjectScope(.container)
     }
 }

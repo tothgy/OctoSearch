@@ -6,7 +6,7 @@
 import Foundation
 
 struct Repository: Decodable {
-    let id: String
+    let id: Int
     let name: String
     let fullName: String
     let htmlUrl: String
