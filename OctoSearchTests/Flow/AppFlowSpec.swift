@@ -11,6 +11,7 @@ import RxSwift
 import Swinject
 import RxFlow
 import RxTest
+import ViewControllerPresentationSpy
 
 // swiftlint:disable file_length
 class AppFlowSpec: QuickSpec {
@@ -21,7 +22,6 @@ class AppFlowSpec: QuickSpec {
             var sut: AppFlow!
             var testCoordinator: FlowCoordinator!
             var testStepper: TestStepper!
-            var disposeBag: DisposeBag!
 
             beforeEach {
                 MainAssembler.shared.create(with: TestAssembly())
@@ -35,14 +35,8 @@ class AppFlowSpec: QuickSpec {
                     presentAsInitialViewController(root)
                 }
                 testCoordinator.coordinate(flow: sut, with: testStepper)
-
-                disposeBag = DisposeBag()
             }
             
-            afterEach {
-                disposeBag = nil
-            }
-
             context("when the initial view is requested") {
                 it("shows the Search view") {
                     testStepper.triggerStep(AppStep.rootViewRequested)
@@ -58,6 +52,28 @@ class AppFlowSpec: QuickSpec {
 
                     expect(sut.rootViewController.presentedViewController)
                         .toEventually(beAKindOf(SFSafariViewController.self))
+                }
+            }
+
+            context("when showing an alert is requested") {
+                it("shows the alert") {
+                    let alertVerifier = AlertVerifier()
+                    let expectedAlert: AlertDetails = .init(
+                        title: "Title",
+                        message: "Message",
+                        actions: [AlertAction(title: "OK", style: .cancel)])
+
+                    testStepper.triggerStep(AppStep.alert(expectedAlert))
+
+                    alertVerifier.verify(
+                        title: expectedAlert.title,
+                        message: expectedAlert.message,
+                        animated: true,
+                        actions: [
+                            .cancel("OK")
+                        ],
+                        presentingViewController: sut.rootViewController
+                    )
                 }
             }
         }

@@ -45,6 +45,18 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
                 guard let self = self else { return .just([]) }
                 return self.searchService.search(searchText)
             })
+            .catchError({ [weak self] (error) -> Observable<[Repository]> in
+                let alertDetails: AlertDetails = .init(
+                    title: L10n.Alert.Error.title,
+                    message: error.localizedDescription,
+                    error: nil,
+                    actions: [
+                        .okAction
+                    ])
+
+                self?.steps.accept(AppStep.alert(alertDetails))
+                return .error(error)
+            })
             .map({ (repositories: [Repository]) -> [RepositoryCellModel] in
                 return repositories.map({ (repository: Repository) in
                     return RepositoryCellModel(
@@ -61,6 +73,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
                         }))
                 })
             })
+            .retry()
             .share(replay: 1)
     }
 }

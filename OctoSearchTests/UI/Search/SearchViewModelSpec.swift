@@ -147,6 +147,57 @@ class SearchViewModelSpec: QuickSpec {
                     expect(mockSearchService.invokedSearchCount).to(equal(0))
                 }
             }
+
+            context("when a search request fails") {
+                let expectedAlertDetails: AlertDetails = .init(
+                    title: "Error",
+                    message: "Localized description",
+                    actions: [AlertAction(title: "OK", style: .default)])
+
+                beforeEach {
+                    sut.cells$.subscribe().disposed(by: disposeBag)
+
+                    mockSearchService.stubbedSearchResult = .error(
+                        NSError(
+                            domain: "ApiError",
+                            code: -1,
+                            userInfo: [
+                                NSLocalizedDescriptionKey: "Localized description"
+                            ]))
+                }
+
+                it("requests to show an error alert") {
+                    subscribe(
+                        to: sut.steps.asObservable(),
+                        trigger: {
+                            sut.searchText.accept("a")
+                        },
+                        verify: {(emissions: [Step]) in
+                            expect(emissions).to(haveCount(1))
+                            guard
+                                let appStep = emissions.last as? AppStep,
+                                case let AppStep.alert(receivedAlertDetails) = appStep,
+                                receivedAlertDetails == expectedAlertDetails
+                            else {
+                                fail("""
+                                    Expected to get AppStep.alert(\(expectedAlertDetails)), \
+                                    got: \(String(describing: emissions.last))
+                                    """)
+                                return
+                            }
+                        }).disposed(by: disposeBag)
+                }
+
+                it("continues listening to search requests") {
+                    sut.searchText.accept("a")
+
+                    mockSearchService.stubbedSearchResult = .just([])
+
+                    sut.searchText.accept("aa")
+
+                    expect(mockSearchService.invokedSearchCount).to(equal(2))
+                }
+            }
         }
     }
 }

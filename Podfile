@@ -22,6 +22,7 @@ target 'OctoSearchTests' do
   pod 'Nimble'
   pod 'Quick'
   pod 'RxTest'
+  pod 'ViewControllerPresentationSpy', '~> 5.0'
 end
 
 # Disable Code Coverage for Pods projects
