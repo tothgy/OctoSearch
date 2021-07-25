@@ -12,10 +12,9 @@ import RxCocoa
 import RxSwift
 import RxFlow
 
-// swiftlint:disable file_length
+// swiftlint:disable file_length function_body_length
 class SearchViewModelSpec: QuickSpec {
 
-    // swiftlint:disable function_body_length
     override func spec() {
         describe("SearchViewModel") {
             var sut: SearchViewModel!

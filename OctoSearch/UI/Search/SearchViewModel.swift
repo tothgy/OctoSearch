@@ -12,8 +12,7 @@ protocol SearchViewModelProtocol: HasStepper {
 
     var searchText: PublishRelay<String> { get }
     var loadNextPageRelay: PublishRelay<()> { get }
-    var clearResultsRelay: PublishRelay<()> { get }
-    
+
     // MARK: - Output
 
     var cells$: Observable<[RepositoryCellModel]> { get }
@@ -26,8 +25,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
 
     var searchText: PublishRelay<String> = .init()
     var loadNextPageRelay: PublishRelay<()> = .init()
-    var clearResultsRelay: PublishRelay<()> = .init()
-    
+
     // MARK: - Output
 
     var cells$: Observable<[RepositoryCellModel]> = .never()
@@ -45,7 +43,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
     var steps: PublishRelay<Step> = .init()
 
     private let showLoadingRelay: BehaviorRelay<Bool> = .init(value: false)
-    private let nextPageSubject: ReplaySubject<URL> = .create(bufferSize: 1)
+    private let nextPageSubject: ReplaySubject<URL?> = .create(bufferSize: 1)
 
     init() {
         showLoading$ = showLoadingRelay.asObservable()
@@ -56,13 +54,12 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
             .do(onNext: { [weak self] _ in
                 self?.showLoadingRelay.accept(true)
             })
-            .flatMapLatest({ [weak self] (nextPageUrl: URL) -> Observable<[Repository]> in
-                guard let self = self else { return .just([]) }
+            .flatMapLatest({ [weak self] (nextPageUrl: URL?) -> Observable<[Repository]> in
+                guard let self = self, let nextPageUrl = nextPageUrl else { return .just([]) }
+
                 return self.searchService.nextSearchPage(nextPageUrl)
                     .do(onSuccess: { [weak self] (_, nextPageUrl) in
-                        if let nextPageUrl = nextPageUrl {
-                            self?.nextPageSubject.onNext(nextPageUrl)
-                        }
+                        self?.nextPageSubject.onNext(nextPageUrl)
                     })
                     .map({ (repositories, _) in return repositories })
                     .asObservable()
@@ -89,9 +86,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
                                 self?.showLoadingRelay.accept(false)
                             })
                             .do(onSuccess: { [weak self] (_, nextPageUrl) in
-                                if let nextPageUrl = nextPageUrl {
-                                    self?.nextPageSubject.onNext(nextPageUrl)
-                                }
+                                self?.nextPageSubject.onNext(nextPageUrl)
                             })
                             .map({ (repositories, _) in return repositories })
                     )
@@ -101,10 +96,9 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
                 return self.createCellModels(fromRepositories: repositories)
             })
 
-        let clearResults$: Observable<[RepositoryCellModel]> = clearResultsRelay.asObservable()
-            .map({ _ -> [RepositoryCellModel] in
-                return []
-            })
+        let clearResults$: Observable<[RepositoryCellModel]> = searchText
+            .filter({ $0.isEmpty })
+            .map({ _ in return [] })
 
         cells$ = Observable.merge(searchResults$, nextPageRequest$, clearResults$)
             .catchError({ [weak self] (error) -> Observable<[RepositoryCellModel]> in

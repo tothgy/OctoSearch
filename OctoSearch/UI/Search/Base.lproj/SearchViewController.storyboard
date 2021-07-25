@@ -42,11 +42,19 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="FsL-Xh-Fh0" id="df7-A5-F6U"/>
+                        <outlet property="emptyLabel" destination="Icm-Uq-AFM" id="Oz3-H3-4jE"/>
                         <outlet property="searchBar" destination="WlN-5f-74d" id="iM9-1Y-Cah"/>
                         <outlet property="tableView" destination="xpd-iW-fJq" id="2Pb-v4-2MC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMx-d5-fsm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Icm-Uq-AFM">
+                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </objects>
             <point key="canvasLocation" x="143.47826086956522" y="138.61607142857142"/>
         </scene>
