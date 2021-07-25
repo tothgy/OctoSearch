@@ -70,7 +70,11 @@ extension AppFlowSpec {
 
             container.register(SchedulerType.self) { _ in
                 return TestScheduler(initialClock: 0, resolution: 0.001)
-            }.inObjectScope(.container)
+            }.inObjectScope(.transient)
+
+            container.register(SearchServiceProtocol.self) { _ in
+                return MockSearchService()
+            }.inObjectScope(.transient)
         }
     }
 }

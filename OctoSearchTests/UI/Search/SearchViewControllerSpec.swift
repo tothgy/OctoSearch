@@ -94,24 +94,35 @@ class SearchViewControllerSpec: QuickSpec {
                     it("does not request the view model to search") {
                         sut.loadViewIfNeeded()
 
-                        sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "a")
+                        subscribe(
+                            to: mockViewModel.searchText.asObservable(),
+                            trigger: {
+                                sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "a")
 
-                        testScheduler.advanceTo(590)
-
-                        expect(mockViewModel.invokedSearchCount).to(equal(0))
+                                testScheduler.advanceTo(590)
+                            },
+                            verify: {(emissions: [String]) in
+                                expect(emissions).to(beEmpty())
+                            }).disposed(by: disposeBag)
                     }
                 }
 
                 context("and more than 600ms passed since the user finished typing") {
                     it("requests the view model to search with the given search term") {
                         sut.loadViewIfNeeded()
-                        sut.searchBar.text = "a"
-                        sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "foo")
 
-                        testScheduler.advanceTo(600)
+                        subscribe(
+                            to: mockViewModel.searchText.asObservable(),
+                            trigger: {
+                                sut.searchBar.text = "a"
+                                sut.searchBar.delegate?.searchBar?(sut.searchBar, textDidChange: "foo")
 
-                        expect(mockViewModel.invokedSearchCount).to(equal(1))
-                        expect(mockViewModel.invokedSearchParameters?.searchText).to(equal("a"))
+                                testScheduler.advanceTo(600)
+                            },
+                            verify: {(emissions: [String]) in
+                                expect(emissions).to(haveCount(1))
+                                expect(emissions.last).to(equal("a"))
+                            }).disposed(by: disposeBag)
                     }
                 }
             }

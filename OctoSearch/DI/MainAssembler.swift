@@ -42,5 +42,9 @@ class MainAssembly: MainAssemblyProtocol {
         container.register(SchedulerType.self) { _ in
             return MainScheduler.instance
         }.inObjectScope(.container)
+
+        container.register(SearchServiceProtocol.self) { _ in
+            return SearchService()
+        }.inObjectScope(.transient)
     }
 }
