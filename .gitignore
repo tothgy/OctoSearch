@@ -82,8 +82,7 @@ Temporary Items
 # End of https://www.gitignore.io/api/macos
 
 # Generated
-Instructor/Generated/Config/Config.plist
-Instructor/GoogleService-Info.plist
+Octosearch/Generated
 
 # Junk
 *.profraw

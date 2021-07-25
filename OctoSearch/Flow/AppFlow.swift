@@ -11,15 +11,25 @@ class AppFlow: Flow {
          return self.rootViewController
      }
 
-     private let rootViewController = UINavigationController()
+     let rootViewController = UINavigationController()
 
      func navigate(to step: Step) -> FlowContributors {
          guard let step = step as? AppStep else { return .none }
 
          switch step {
-         default:
-             return .none
+         case .rootViewRequested:
+            return showRootView()
          }
      }
 
+    private func showRootView() -> FlowContributors {
+        let viewController = StoryboardScene.SearchViewController.initialScene.instantiate()
+
+        rootViewController.setViewControllers([viewController], animated: false)
+
+        return .one(
+            flowContributor: .contribute(
+                withNextPresentable: viewController,
+                withNextStepper: DefaultStepper()))
+    }
  }

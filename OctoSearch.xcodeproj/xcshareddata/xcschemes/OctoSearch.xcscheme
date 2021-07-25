@@ -38,16 +38,6 @@
                ReferencedContainer = "container:OctoSearch.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4D07AC3A26AB0C8E00152739"
-               BuildableName = "OctoSearchUITests.xctest"
-               BlueprintName = "OctoSearchUITests"
-               ReferencedContainer = "container:OctoSearch.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
