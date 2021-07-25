@@ -91,6 +91,15 @@ class SearchViewModelSpec: QuickSpec {
                     }
                 }
             }
+
+            context("given that an empty string has been published on the search text") {
+                it("does not request the Search Service to search") {
+                    sut.cells$.subscribe().disposed(by: disposeBag)
+                    sut.searchText.accept("")
+
+                    expect(mockSearchService.invokedSearchCount).to(equal(0))
+                }
+            }
         }
     }
 }
