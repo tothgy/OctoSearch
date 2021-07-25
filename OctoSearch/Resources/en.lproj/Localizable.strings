@@ -4,4 +4,7 @@
   
 */
 
+"alert.action.ok" = "OK";
+"alert.error.title" = "Error";
+
 "search.title" = "GitHub repositories";

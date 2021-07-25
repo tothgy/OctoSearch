@@ -22,6 +22,8 @@ class AppFlow: Flow {
             return showRootView()
          case let .webViewRequested(url):
             return showWebView(withUrl: url)
+         case let .alert(alertDetails):
+            return presentAlert(alertDetails: alertDetails)
          }
      }
 
@@ -45,5 +47,20 @@ class AppFlow: Flow {
             flowContributor: .contribute(
                 withNextPresentable: webViewController,
                 withNextStepper: DefaultStepper()))
+    }
+
+    private func presentAlert(alertDetails: AlertDetails) -> FlowContributors {
+        let alert: UIAlertController = .init(
+            title: alertDetails.title,
+            message: alertDetails.message,
+            preferredStyle: .alert)
+
+        for action in alertDetails.actions {
+            alert.addAction(action.nativeAction)
+        }
+
+        rootViewController.present(alert, animated: true)
+
+        return .none
     }
  }

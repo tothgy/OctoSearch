@@ -31,6 +31,16 @@ class MockSearchViewModelBase: SearchViewModelProtocol {
         return stubbedCells
     }
 
+    var invokedShowLoadingGetter = false
+    var invokedShowLoadingGetterCount = 0
+    var stubbedShowLoading: Observable<Bool>!
+
+    var showLoading$: Observable<Bool> {
+        invokedShowLoadingGetter = true
+        invokedShowLoadingGetterCount += 1
+        return stubbedShowLoading
+    }
+
     var invokedStepperGetter = false
     var invokedStepperGetterCount = 0
     var stubbedStepper: Stepper!
@@ -47,11 +57,17 @@ class MockSearchViewModel: MockSearchViewModelBase {
         super.init()
         stubbedSearchText = .init()
         stubbedCells = cellsSubject
+        stubbedShowLoading = showLoadingSubject
         stubbedStepper = DefaultStepper()
     }
 
     private let cellsSubject = ReplaySubject<[RepositoryCellModel]>.create(bufferSize: 1)
     func expectCellsToReturn(_ value: [RepositoryCellModel]) {
         cellsSubject.onNext(value)
+    }
+
+    private let showLoadingSubject = ReplaySubject<Bool>.create(bufferSize: 1)
+    func expectShowLoadingToReturn(_ value: Bool) {
+        showLoadingSubject.onNext(value)
     }
 }

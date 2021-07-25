@@ -34,6 +34,7 @@ PODS:
   - Swinject (2.6.0)
   - SwinjectStoryboard (2.2.0):
     - Swinject (~> 2.6)
+  - ViewControllerPresentationSpy (5.1.0)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - SwiftLint
   - Swinject (= 2.6.0)
   - SwinjectStoryboard (= 2.2.0)
+  - ViewControllerPresentationSpy (~> 5.0)
 
 SPEC REPOS:
   trunk:
@@ -66,6 +68,7 @@ SPEC REPOS:
     - SwiftLint
     - Swinject
     - SwinjectStoryboard
+    - ViewControllerPresentationSpy
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
@@ -83,7 +86,8 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
+  ViewControllerPresentationSpy: 806584e0413860ee451ec5e513ed4661c39a3727
 
-PODFILE CHECKSUM: 6ee2153716549f53ca1907f7d149c1e56702f62b
+PODFILE CHECKSUM: f7a9e037763d8aee20844b9e72723e5f1cd6ef7d
 
 COCOAPODS: 1.10.1

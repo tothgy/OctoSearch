@@ -13,6 +13,7 @@ class SearchViewController: UIViewController, HasStepper {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @Inject
     var viewModel: SearchViewModelProtocol
@@ -72,6 +73,10 @@ class SearchViewController: UIViewController, HasStepper {
             })
             .subscribe()
             .disposed(by: disposeBag)
+
+        viewModel.showLoading$.asDriver(onErrorJustReturn: false)
+            .drive(activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
     }
 
     private func bindToViewModel() {
@@ -87,11 +92,6 @@ class SearchViewController: UIViewController, HasStepper {
     }
 
     private func setupTableView() {
-        var contentInset = tableView.contentInset
-        contentInset.top = searchBar.bounds.height
-
-        tableView.contentInset = contentInset
-
         tableView.register(RepositoryCell.self, forCellReuseIdentifier: RepositoryCell.reuseIdentifier)
     }
 }
