@@ -8,3 +8,4 @@
 "alert.error.title" = "Error";
 
 "search.title" = "GitHub repositories";
+"search.empty.message" = "Start typing into the search bar";

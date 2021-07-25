@@ -85,6 +85,22 @@ class SearchViewController: UIViewController, HasStepper {
             .debounce(.milliseconds(600), scheduler: typingScheduler)
             .bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
+
+        searchBar.rx.text.orEmpty
+            .filter({ $0.isEmpty })
+            .map({ _ in () })
+            .bind(to: viewModel.clearResultsRelay)
+            .disposed(by: disposeBag)
+
+        tableView.rx.contentOffset
+            .map({ [weak self] contentOffset -> Bool in
+                guard let self = self else { return false }
+                return self.tableView.isNearBottomEdge()
+            })
+            .filter({ $0 })
+            .map({ _ in return () })
+            .bind(to: viewModel.loadNextPageRelay)
+            .disposed(by: disposeBag)
     }
 
     private func setupNavigationBar() {
@@ -93,5 +109,11 @@ class SearchViewController: UIViewController, HasStepper {
 
     private func setupTableView() {
         tableView.register(RepositoryCell.self, forCellReuseIdentifier: RepositoryCell.reuseIdentifier)
+    }
+}
+
+extension UIScrollView {
+    func  isNearBottomEdge(edgeOffset: CGFloat = 20.0) -> Bool {
+        self.contentOffset.y + self.frame.size.height + edgeOffset > self.contentSize.height
     }
 }

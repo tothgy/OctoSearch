@@ -8,6 +8,7 @@ import Moya
 
 enum GitHubApi {
     case searchRepositories(query: String)
+    case nextSearchPage(url: URL)
 }
 
 extension GitHubApi: TargetType {
@@ -16,18 +17,24 @@ extension GitHubApi: TargetType {
         switch self {
         case .searchRepositories:
             return URL(string: "https://api.github.com")!
+        case let .nextSearchPage(url):
+            return url
         }
     }
     var path: String {
         switch self {
         case .searchRepositories:
             return "/search/repositories"
+        case .nextSearchPage:
+            return ""
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .searchRepositories:
+            return .get
+        case .nextSearchPage:
             return .get
         }
     }
@@ -38,6 +45,8 @@ extension GitHubApi: TargetType {
             return .requestParameters(
                     parameters: ["q": query],
                     encoding: URLEncoding.default)
+        case .nextSearchPage:
+            return .requestPlain
         }
     }
 
@@ -50,6 +59,8 @@ extension GitHubApi: TargetType {
     }
 
     var headers: [String: String]? {
-        return ["Accept": "application/vnd.github.v3+json"]
+        return [
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": "Basic dG90aGd5OmdocF9DdHNLRHZFOUtrOWNLaHBGZzU1cE5wRDlrRzNiR1IwWTRTNXA="]
     }
 }
