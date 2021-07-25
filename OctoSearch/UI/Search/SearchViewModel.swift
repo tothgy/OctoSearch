@@ -5,8 +5,9 @@
 
 import RxSwift
 import RxRelay
+import RxFlow
 
-protocol SearchViewModelProtocol {
+protocol SearchViewModelProtocol: HasStepper {
     // MARK: - Input
 
     var searchText: PublishRelay<String> { get }
@@ -16,7 +17,7 @@ protocol SearchViewModelProtocol {
     var cells$: Observable<[RepositoryCellModel]> { get }
 }
 
-class SearchViewModel: SearchViewModelProtocol {
+class SearchViewModel: SearchViewModelProtocol, Stepper {
 
     // MARK: - Input
 
@@ -31,6 +32,12 @@ class SearchViewModel: SearchViewModelProtocol {
     @Inject
     var searchService: SearchServiceProtocol
 
+    var stepper: Stepper {
+        return self
+    }
+
+    var steps: PublishRelay<Step> = .init()
+
     init() {
         cells$ = searchText
             .filter({ !$0.isEmpty })
@@ -39,11 +46,19 @@ class SearchViewModel: SearchViewModelProtocol {
                 return self.searchService.search(searchText)
             })
             .map({ (repositories: [Repository]) -> [RepositoryCellModel] in
-                return repositories.map({
+                return repositories.map({ (repository: Repository) in
                     return RepositoryCellModel(
-                        title: $0.fullName,
-                        subtitle: $0.repositoryDescription,
-                        selectionCompletable: .empty())
+                        title: repository.fullName,
+                        subtitle: repository.repositoryDescription,
+                        selectionCompletable: .create(subscribe: { [weak self] (completable) -> Disposable in
+                            guard let repositoryUrl = URL(string: repository.htmlUrl) else {
+                                return Disposables.create()
+                            }
+
+                            self?.steps.accept(AppStep.webViewRequested(url: repositoryUrl))
+                            completable(.completed)
+                            return Disposables.create()
+                        }))
                 })
             })
             .share(replay: 1)

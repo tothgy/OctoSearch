@@ -4,6 +4,7 @@
 //
 
 @testable import OctoSearch
+import SafariServices
 import Nimble
 import Quick
 import RxSwift
@@ -47,6 +48,16 @@ class AppFlowSpec: QuickSpec {
                     testStepper.triggerStep(AppStep.rootViewRequested)
 
                     expect(sut.rootViewController.topViewController).to(beAKindOf(SearchViewController.self))
+                }
+            }
+
+            context("when the Web view is requested") {
+                it("shows the Web view for the given URL") {
+                    let url: URL! = URL(string: "https://github.com")
+                    testStepper.triggerStep(AppStep.webViewRequested(url: url))
+
+                    expect(sut.rootViewController.presentedViewController)
+                        .toEventually(beAKindOf(SFSafariViewController.self))
                 }
             }
         }

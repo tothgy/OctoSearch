@@ -10,6 +10,7 @@ import Swinject
 import SwinjectStoryboard
 import RxCocoa
 import RxSwift
+import RxFlow
 
 // swiftlint:disable file_length
 class SearchViewModelSpec: QuickSpec {
@@ -32,6 +33,10 @@ class SearchViewModelSpec: QuickSpec {
             
             afterEach {
                 disposeBag = nil
+            }
+
+            it("is a Stepper") {
+                expect(sut).to(beAKindOf(Stepper.self))
             }
 
             describe("cells$") {
@@ -87,6 +92,48 @@ class SearchViewModelSpec: QuickSpec {
                                 expect(cellModels).to(haveCount(1))
                                 let cellModel = cellModels.last!
                                 expect(cellModel.subtitle).to(equal(expectedRepository.repositoryDescription))
+                            }).disposed(by: disposeBag)
+                    }
+
+                    it("""
+                        emits a list of cell models where \
+                        each cell model's selection completable requests to show a web view with the correspoding \
+                        Repository's HTML URL on subscribe
+                        """) {
+                        var selectionCompletable: Completable!
+
+                        subscribe(
+                            to: sut.cells$,
+                            trigger: {
+                                sut.searchText.accept("repo")
+                            },
+                            verify: {(emissions: [[RepositoryCellModel]]) in
+                                expect(emissions).to(haveCount(1))
+                                let cellModels = emissions.last!
+                                expect(cellModels).to(haveCount(1))
+                                let cellModel = cellModels.last!
+                                selectionCompletable = cellModel.selectionCompletable
+                            }).disposed(by: disposeBag)
+
+                        subscribe(
+                            to: sut.steps.asObservable(),
+                            trigger: {
+                                selectionCompletable.subscribe().disposed(by: disposeBag)
+                            },
+                            verify: {(emissions: [Step]) in
+                                expect(emissions).to(haveCount(1))
+
+                                guard
+                                    let appStep = emissions.last as? AppStep,
+                                    case let AppStep.webViewRequested(url) = appStep,
+                                    url.absoluteString == "https://github.com/repo"
+                                else {
+                                    fail("""
+                                        Expected to get AppStep.webViewRequested("https://github.com/repo") \
+                                        got: \(String(describing: emissions.last))
+                                        """)
+                                    return
+                                }
                             }).disposed(by: disposeBag)
                     }
                 }

@@ -8,4 +8,5 @@ import RxFlow
 
 enum AppStep: Step {
     case rootViewRequested
+    case webViewRequested(url: URL)
 }
