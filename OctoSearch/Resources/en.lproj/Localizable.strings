@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  OctoSearch
+  
+*/
+
+"alert.action.ok" = "OK";
+"alert.error.title" = "Error";
+
+"search.title" = "GitHub repositories";
+"search.searchBar.placeholder" = "Search GitHub";
+"search.empty.message" = "Start typing into the search bar";
+"search.empty.noResult" = "We couldn’t find any repositories matching the given term";
