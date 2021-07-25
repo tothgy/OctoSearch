@@ -67,11 +67,7 @@ class SearchViewController: UIViewController {
         searchBar.rx.text.orEmpty
             .distinctUntilChanged()
             .debounce(.milliseconds(600), scheduler: typingScheduler)
-            .flatMap({ [weak self] (searchTerm: String) -> Completable in
-                guard let self = self else { return .empty() }
-                return self.viewModel.search(searchTerm)
-            })
-            .subscribe()
+            .bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
     }
 

@@ -6,8 +6,19 @@
 @testable import OctoSearch
 import Foundation
 import RxSwift
+import RxRelay
 
 class MockSearchViewModelBase: SearchViewModelProtocol {
+
+    var invokedSearchTextGetter = false
+    var invokedSearchTextGetterCount = 0
+    var stubbedSearchText: PublishRelay<String>!
+
+    var searchText: PublishRelay<String> {
+        invokedSearchTextGetter = true
+        invokedSearchTextGetterCount += 1
+        return stubbedSearchText
+    }
 
     var invokedCellsGetter = false
     var invokedCellsGetterCount = 0
@@ -18,26 +29,12 @@ class MockSearchViewModelBase: SearchViewModelProtocol {
         invokedCellsGetterCount += 1
         return stubbedCells
     }
-
-    var invokedSearch = false
-    var invokedSearchCount = 0
-    var invokedSearchParameters: (searchText: String, Void)?
-    var invokedSearchParametersList = [(searchText: String, Void)]()
-    var stubbedSearchResult: Completable!
-
-    func search(_ searchText: String) -> Completable {
-        invokedSearch = true
-        invokedSearchCount += 1
-        invokedSearchParameters = (searchText, ())
-        invokedSearchParametersList.append((searchText, ()))
-        return stubbedSearchResult
-    }
 }
 
 class MockSearchViewModel: MockSearchViewModelBase {
     override init() {
         super.init()
-        stubbedSearchResult = .never()
+        stubbedSearchText = .init()
         stubbedCells = cellsSubject
     }
 
