@@ -129,9 +129,17 @@ class SearchViewController: UIViewController, HasStepper {
 
     private func setupNavigationBar() {
         title = L10n.Search.title
+
+        let navigationBar = navigationController?.navigationBar
+
+        navigationBar?.barTintColor = UIColor.white
+        navigationBar?.isTranslucent = false
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+        navigationBar?.shadowImage = UIImage()
     }
 
     private func setupSearchBar() {
+        searchBar.searchBarStyle = .minimal
         searchBar.placeholder = L10n.Search.SearchBar.placeholder
     }
 
