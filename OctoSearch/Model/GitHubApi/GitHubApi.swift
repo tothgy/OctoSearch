@@ -60,7 +60,7 @@ extension GitHubApi: TargetType {
 
     var headers: [String: String]? {
         return [
-            "Accept": "application/vnd.github.v3+json",
-            "Authorization": "Basic dG90aGd5OmdocF9DdHNLRHZFOUtrOWNLaHBGZzU1cE5wRDlrRzNiR1IwWTRTNXA="]
+            "Accept": "application/vnd.github.v3+json"
+        ]
     }
 }
