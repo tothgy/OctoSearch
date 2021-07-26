@@ -9,7 +9,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let navigationBar = navigationController?.navigationBar
+
+        navigationBar?.barTintColor = UIColor.white
+        navigationBar?.isTranslucent = false
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+        navigationBar?.shadowImage = UIImage()
     }
 }
 
