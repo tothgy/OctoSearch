@@ -403,10 +403,10 @@
 			buildConfigurationList = 4D07AC4426AB0C8E00152739 /* Build configuration list for PBXNativeTarget "OctoSearch" */;
 			buildPhases = (
 				3693BB14A89C82BADBE2C450 /* [CP] Check Pods Manifest.lock */,
+				4D35F4F126AB52E5001A0524 /* Swiftgen */,
 				4D07AC1626AB0C8C00152739 /* Sources */,
 				4D07AC1726AB0C8C00152739 /* Frameworks */,
 				4D07AC1826AB0C8C00152739 /* Resources */,
-				4D35F4F126AB52E5001A0524 /* Swiftgen */,
 				6FB7D6EEFCCF79A7E1A97548 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
