@@ -86,6 +86,6 @@ Temporary Items
 
 # Generated
 OctoSearch/Generated/Strings.swift
-OctoSearch/Generated/StoryboardSeques.swift
+OctoSearch/Generated/StoryboardSegues.swift
 OctoSearch/Generated/Assets.swift
 OctoSearch/Generated/StoryboardScenes.swift
