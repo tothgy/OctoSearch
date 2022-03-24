@@ -1,5 +1,6 @@
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
+inhibit_all_warnings!
 
 target 'OctoSearch' do
   pod 'RxSwift'
@@ -34,6 +35,9 @@ post_install do |installer_representation|
       config.build_settings['EXCLUDED_ARCHS[sdk=appletvsimulator*]'] = 'arm64'
 
       config.build_settings['CLANG_ENABLE_CODE_COVERAGE'] = 'NO'
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+      end
       if config.name == 'Debug'
         config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
