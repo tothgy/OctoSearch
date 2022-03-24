@@ -7,22 +7,19 @@ import UIKit
 import RxSwift
 import RxFlow
 import CocoaLumberjack
+import InjectPropertyWrapper
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+
+    private let assembler = MainAssembler.create(withAssembly: MainAssembly())
     private let coordinator = FlowCoordinator()
     private let appFlow = AppFlow()
     private let disposeBag: DisposeBag = .init()
 
-    let dependencyManager: MainAssembler = {
-        let manager = MainAssembler.shared
-        let assembler: MainAssemblyProtocol = MainAssembly()
-        manager.create(with: assembler)
-        return manager
-    }()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        InjectSettings.resolver = assembler.container
         setupLogging()
         initiateFlow()
 

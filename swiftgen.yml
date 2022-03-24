@@ -18,5 +18,3 @@ ib:
     output: OctoSearch/Generated/StoryboardScenes.swift
   - templateName: segues-swift5
     output: OctoSearch/Generated/StoryboardSegues.swift
-  params:
-    ignoreTargetModule: true

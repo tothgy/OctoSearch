@@ -15,4 +15,10 @@ Make sure to always open the Xcode workspace instead of the project file when bu
 
 ## Notes
 
-The app issues anonymous requests to the GitHub API, which is rate limited to around 10 requests per minutes.
+The app issues anonymous requests to the GitHub API, which is rate limited to around 10 requests per minute.
+
+
+## ⚠️ Xcode 13
+
+Please bear in mind that the current version of the test framework does not work
+properly with Xcode 13. [issue](https://github.com/Quick/Quick/issues/1123)

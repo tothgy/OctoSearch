@@ -9,6 +9,7 @@ import Quick
 import RxSwift
 import Swinject
 import Moya
+import InjectPropertyWrapper
 
 // swiftlint:disable file_length function_body_length
 class SearchServiceSpec: QuickSpec {
@@ -16,12 +17,14 @@ class SearchServiceSpec: QuickSpec {
     override func spec() {
         describe("SearchService") {
             var sut: SearchService!
+            var assembler: MainAssembler!
             var disposeBag: DisposeBag!
 
             beforeEach {
-                MainAssembler.shared.create(with: TestAssembly())
+                assembler = MainAssembler.create(withAssembly: TestAssembly())
+                InjectSettings.resolver = assembler.container
 
-                let container = MainAssembler.shared.container
+                let container = assembler.container
                 sut = container.resolve(SearchService.self)
                 disposeBag = DisposeBag()
             }
@@ -83,10 +86,9 @@ private var expectedSearchResponse: EndpointSampleResponse = .networkResponse(20
 
 extension SearchServiceSpec {
     
-    class TestAssembly: MainAssemblyProtocol {
-        var container: Container = .init()
+    class TestAssembly: Assembly {
 
-        func assemble() {
+        func assemble(container: Container) {
             container.register(SearchService.self) { _ in
                 let instance = SearchService()
                 return instance

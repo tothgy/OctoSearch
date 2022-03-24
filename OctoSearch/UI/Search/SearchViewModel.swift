@@ -4,8 +4,10 @@
 //
 
 import RxSwift
+import RxSwiftExt
 import RxRelay
 import RxFlow
+import InjectPropertyWrapper
 
 protocol SearchViewModelProtocol: HasStepper {
     // MARK: - Input
@@ -98,9 +100,10 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
 
         let clearResults$: Observable<[RepositoryCellModel]> = searchText
             .filter({ $0.isEmpty })
-            .map({ _ in return [] })
+            .mapTo([])
 
-        cells$ = Observable.merge(searchResults$, nextPageRequest$, clearResults$)
+        cells$ = Observable
+            .merge(searchResults$, nextPageRequest$, clearResults$)
             .catchError({ [weak self] (error) -> Observable<[RepositoryCellModel]> in
                 let alertDetails: AlertDetails = .init(
                     title: L10n.Alert.Error.title,

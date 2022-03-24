@@ -1,5 +1,6 @@
-platform :ios, '11.0'
+platform :ios, '13.0'
 use_frameworks!
+inhibit_all_warnings!
 
 target 'OctoSearch' do
   pod 'RxSwift'
@@ -9,6 +10,7 @@ target 'OctoSearch' do
   pod 'SwiftLint'
   pod 'SwiftGen'
   pod 'Swinject', '2.6.0'
+  pod 'InjectPropertyWrapper'
   pod 'SwinjectStoryboard', '2.2.0'
   pod 'CocoaLumberjack/Swift'
 end
@@ -18,11 +20,13 @@ target 'OctoSearchTests' do
   pod 'RxFlow'
   pod 'Swinject', '2.6.0'
   pod 'SwinjectStoryboard', '2.2.0'
+  pod 'InjectPropertyWrapper'
   pod 'Moya/RxSwift'
   pod 'Nimble'
   pod 'Quick'
   pod 'RxTest'
   pod 'ViewControllerPresentationSpy', '~> 5.0'
+  pod 'CocoaLumberjack/Swift'
 end
 
 # Disable Code Coverage for Pods projects
@@ -34,6 +38,9 @@ post_install do |installer_representation|
       config.build_settings['EXCLUDED_ARCHS[sdk=appletvsimulator*]'] = 'arm64'
 
       config.build_settings['CLANG_ENABLE_CODE_COVERAGE'] = 'NO'
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+      end
       if config.name == 'Debug'
         config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
