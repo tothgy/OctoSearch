@@ -11,7 +11,7 @@ import class UIKit.UITableView
 import class UIKit.UICollectionViewCell
 import struct Foundation.IndexPath
 
-protocol ReusableView: class {
+protocol ReusableView: AnyObject {
     static var reuseIdentifier: String { get }
 }
 
