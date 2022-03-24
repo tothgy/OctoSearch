@@ -34,6 +34,7 @@ class SearchViewController: UIViewController, HasStepper {
         searchController.searchBar.placeholder = L10n.Search.SearchBar.placeholder
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.automaticallyShowsCancelButton = false
         return searchController
     }()
 
