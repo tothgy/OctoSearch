@@ -1,4 +1,4 @@
-platform :ios, '12.0'
+platform :ios, '13.0'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -10,6 +10,7 @@ target 'OctoSearch' do
   pod 'SwiftLint'
   pod 'SwiftGen'
   pod 'Swinject', '2.6.0'
+  pod 'InjectPropertyWrapper'
   pod 'SwinjectStoryboard', '2.2.0'
   pod 'CocoaLumberjack/Swift'
 end
@@ -19,11 +20,13 @@ target 'OctoSearchTests' do
   pod 'RxFlow'
   pod 'Swinject', '2.6.0'
   pod 'SwinjectStoryboard', '2.2.0'
+  pod 'InjectPropertyWrapper'
   pod 'Moya/RxSwift'
   pod 'Nimble'
   pod 'Quick'
   pod 'RxTest'
   pod 'ViewControllerPresentationSpy', '~> 5.0'
+  pod 'CocoaLumberjack/Swift'
 end
 
 # Disable Code Coverage for Pods projects

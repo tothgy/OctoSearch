@@ -3,12 +3,13 @@ PODS:
   - CocoaLumberjack/Core (3.7.2)
   - CocoaLumberjack/Swift (3.7.2):
     - CocoaLumberjack/Core
+  - InjectPropertyWrapper (0.3.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - Nimble (9.2.0)
+  - Nimble (9.2.1)
   - Quick (4.0.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
@@ -29,7 +30,7 @@ PODS:
     - RxSwiftExt/Core
   - RxTest (5.1.2):
     - RxSwift (~> 5)
-  - SwiftGen (6.4.0)
+  - SwiftGen (6.5.1)
   - SwiftLint (0.43.1)
   - Swinject (2.6.0)
   - SwinjectStoryboard (2.2.0):
@@ -38,6 +39,7 @@ PODS:
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
+  - InjectPropertyWrapper
   - Moya/RxSwift
   - Nimble
   - Quick
@@ -55,6 +57,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - CocoaLumberjack
+    - InjectPropertyWrapper
     - Moya
     - Nimble
     - Quick
@@ -73,8 +76,9 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  InjectPropertyWrapper: b8758f7f8f46f0012804a7bf1037ef8f713f098c
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
+  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxFlow: a7f993ba4791174d414509a0ec03bfeff530a826
@@ -82,12 +86,12 @@ SPEC CHECKSUMS:
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   RxSwiftExt: 0d2fd77523a169d1459be34961b996a194bdef0e
   RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
-  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   ViewControllerPresentationSpy: 806584e0413860ee451ec5e513ed4661c39a3727
 
-PODFILE CHECKSUM: 453d32a93b3c94551a59651cc7fa439239a439bb
+PODFILE CHECKSUM: 939e24e0c759a2897f8f4355bd2b7f5fd03c006c
 
 COCOAPODS: 1.11.3

@@ -11,31 +11,35 @@ import Moya
 
 class MainAssembler {
     
-    public static let shared = MainAssembler()
-    public private (set) var container: Container = SwinjectStoryboard.defaultContainer
+    public static var instance: MainAssembler! = nil
+
+    var resolver: Resolver {
+        return assembler.resolver
+    }
+
+    let container: Container
+    private let assembler: Assembler
     
-    private init() {}
-    
-    func create(with assembly: MainAssemblyProtocol) {
-        removeAll()
-        self.container = assembly.container
-        assembly.assemble()
+    // swiftlint:disable force_cast
+    private init(withAssembly assembly: Assembly) {
+        container = SwinjectStoryboard.defaultContainer
+        assembler = Assembler(container: container)
+        assembler.apply(assembly: assembly)
     }
     
-    func removeAll() {
-        container.removeAll()
+    static func create(withAssembly assembly: Assembly) -> MainAssembler {
+        instance = MainAssembler(withAssembly: assembly)
+        return instance
+    }
+
+    func dispose() {
+        SwinjectStoryboard.defaultContainer.removeAll()
     }
 }
 
-protocol MainAssemblyProtocol {
-    var container: Container { get }
-    func assemble()
-}
+class MainAssembly: Assembly {
 
-class MainAssembly: MainAssemblyProtocol {
-    let container: Container = Container()
-    
-    func assemble() {
+    func assemble(container: Container) {
         container.register(SearchViewModelProtocol.self) { _ in
             return SearchViewModel()
         }.inObjectScope(.transient)

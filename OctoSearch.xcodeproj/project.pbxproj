@@ -15,10 +15,10 @@
 		4D2D21E626AC57A900F9C822 /* TestStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D21E526AC57A900F9C822 /* TestStepper.swift */; };
 		4D2D21F026AC582100F9C822 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D21ED26AC582100F9C822 /* TestHelpers.swift */; };
 		4D2D22DE26AC675900F9C822 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D22DD26AC675900F9C822 /* main.swift */; };
+		4D30AD5627ECB1D6000F48F6 /* Container+InjectPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D30AD5527ECB1D6000F48F6 /* Container+InjectPropertyWrapper.swift */; };
 		4D35F46A26AB1E89001A0524 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F46926AB1E89001A0524 /* AppFlow.swift */; };
 		4D35F47226AB1EA2001A0524 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F47126AB1EA2001A0524 /* AppStep.swift */; };
 		4D35F48926AB4799001A0524 /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F48426AB4799001A0524 /* Inject.swift */; };
-		4D35F4A626AB4981001A0524 /* MainAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F4A526AB4981001A0524 /* MainAssembler.swift */; };
 		4D35F4E226AB5050001A0524 /* SearchViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F4E126AB5050001A0524 /* SearchViewControllerSpec.swift */; };
 		4D35F4E626AB51AB001A0524 /* Resolver+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F4E526AB51AB001A0524 /* Resolver+App.swift */; };
 		4D35F4EA26AB5221001A0524 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35F4E926AB5221001A0524 /* SearchViewController.swift */; };
@@ -33,6 +33,8 @@
 		4D587D5E26AD8B2700E7716C /* HasStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D587D5D26AD8B2700E7716C /* HasStepper.swift */; };
 		4D587D6226AD8D6300E7716C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D587D6126AD8D6300E7716C /* Strings.swift */; };
 		4D587D6B26AD92C100E7716C /* AlertDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D587D6A26AD92C100E7716C /* AlertDetails.swift */; };
+		4D86FAAF27ECC751008F5F69 /* MainAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FAAE27ECC751008F5F69 /* MainAssembler.swift */; };
+		4D86FAB127ECC8AC008F5F69 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FAB027ECC8AC008F5F69 /* TestingAppDelegate.swift */; };
 		4D90D54A26AC6D96001586C3 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90D54926AC6D96001586C3 /* LogFormatter.swift */; };
 		4D90D5DF26AC7D9F001586C3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90D5DE26AC7D9F001586C3 /* Repository.swift */; };
 		4D90D61026AC8764001586C3 /* MockSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90D60F26AC8764001586C3 /* MockSearchViewModel.swift */; };
@@ -74,10 +76,10 @@
 		4D2D21E526AC57A900F9C822 /* TestStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepper.swift; sourceTree = "<group>"; };
 		4D2D21ED26AC582100F9C822 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		4D2D22DD26AC675900F9C822 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		4D30AD5527ECB1D6000F48F6 /* Container+InjectPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+InjectPropertyWrapper.swift"; sourceTree = "<group>"; };
 		4D35F46926AB1E89001A0524 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		4D35F47126AB1EA2001A0524 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
 		4D35F48426AB4799001A0524 /* Inject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inject.swift; sourceTree = "<group>"; };
-		4D35F4A526AB4981001A0524 /* MainAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAssembler.swift; sourceTree = "<group>"; };
 		4D35F4E126AB5050001A0524 /* SearchViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerSpec.swift; sourceTree = "<group>"; };
 		4D35F4E526AB51AB001A0524 /* Resolver+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Resolver+App.swift"; sourceTree = "<group>"; };
 		4D35F4E926AB5221001A0524 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,8 @@
 		4D587D5D26AD8B2700E7716C /* HasStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasStepper.swift; sourceTree = "<group>"; };
 		4D587D6126AD8D6300E7716C /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		4D587D6A26AD92C100E7716C /* AlertDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDetails.swift; sourceTree = "<group>"; };
+		4D86FAAE27ECC751008F5F69 /* MainAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAssembler.swift; sourceTree = "<group>"; };
+		4D86FAB027ECC8AC008F5F69 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		4D90D54926AC6D96001586C3 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
 		4D90D5DE26AC7D9F001586C3 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		4D90D60F26AC8764001586C3 /* MockSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				4DAD9C9426AD56D9000A235B /* Model */,
 				4DAD9C7A26AD3CBF000A235B /* Service */,
 				4D07AC3626AB0C8E00152739 /* Info.plist */,
+				4D86FAB027ECC8AC008F5F69 /* TestingAppDelegate.swift */,
 			);
 			path = OctoSearchTests;
 			sourceTree = "<group>";
@@ -252,8 +257,8 @@
 		4D35F48126AB4793001A0524 /* DI */ = {
 			isa = PBXGroup;
 			children = (
+				4D86FAAE27ECC751008F5F69 /* MainAssembler.swift */,
 				4D35F48226AB4799001A0524 /* Inject */,
-				4D35F4A526AB4981001A0524 /* MainAssembler.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 			children = (
 				4D35F48426AB4799001A0524 /* Inject.swift */,
 				4D35F4E526AB51AB001A0524 /* Resolver+App.swift */,
+				4D30AD5527ECB1D6000F48F6 /* Container+InjectPropertyWrapper.swift */,
 			);
 			path = Inject;
 			sourceTree = "<group>";
@@ -606,17 +612,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D35F48926AB4799001A0524 /* Inject.swift in Sources */,
+				4D30AD5627ECB1D6000F48F6 /* Container+InjectPropertyWrapper.swift in Sources */,
 				4D2D22DE26AC675900F9C822 /* main.swift in Sources */,
 				4D90D62226ACAC36001586C3 /* UIKitExtensions.swift in Sources */,
 				4D587D6B26AD92C100E7716C /* AlertDetails.swift in Sources */,
 				4DAD9C8D26AD4A3A000A235B /* GitHubApi.swift in Sources */,
 				4D35F52826AB5594001A0524 /* StoryboardSegues.swift in Sources */,
 				4D90D54A26AC6D96001586C3 /* LogFormatter.swift in Sources */,
+				4D86FAAF27ECC751008F5F69 /* MainAssembler.swift in Sources */,
 				4D35F52926AB5594001A0524 /* Assets.swift in Sources */,
 				4D90D61926ACA497001586C3 /* RepositoryCellModel.swift in Sources */,
 				4D587D5E26AD8B2700E7716C /* HasStepper.swift in Sources */,
 				4D35F47226AB1EA2001A0524 /* AppStep.swift in Sources */,
-				4D35F4A626AB4981001A0524 /* MainAssembler.swift in Sources */,
 				4D35F4EA26AB5221001A0524 /* SearchViewController.swift in Sources */,
 				4D35F4E626AB51AB001A0524 /* Resolver+App.swift in Sources */,
 				4D35F52A26AB5594001A0524 /* StoryboardScenes.swift in Sources */,
@@ -645,6 +652,7 @@
 				4DAD9C9E26AD574B000A235B /* StubSearchSucessResponse.swift in Sources */,
 				4D2D21F026AC582100F9C822 /* TestHelpers.swift in Sources */,
 				4DAD9C9A26AD571B000A235B /* MockMultiTargetApiProvider.swift in Sources */,
+				4D86FAB127ECC8AC008F5F69 /* TestingAppDelegate.swift in Sources */,
 				4DAD9C6A26AD3B69000A235B /* SearchViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
