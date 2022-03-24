@@ -306,8 +306,8 @@ class SearchViewModelSpec: QuickSpec {
                                             let cellModels = emissions.last!
                                             expect(cellModels).to(beEmpty())
                                         }).disposed(by: disposeBag)
-
                                 }
+                            }
                         }
                     }
                 }
