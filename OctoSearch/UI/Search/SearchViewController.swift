@@ -8,10 +8,10 @@ import CocoaLumberjack
 import RxSwift
 import RxCocoa
 import RxFlow
+import InjectPropertyWrapper
 
 class SearchViewController: UIViewController, HasStepper {
 
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var emptyLabel: UILabel!
@@ -24,6 +24,18 @@ class SearchViewController: UIViewController, HasStepper {
     var stepper: Stepper {
         return viewModel.stepper
     }
+
+    var searchBar: UISearchBar {
+        return searchController.searchBar
+    }
+
+    private let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = L10n.Search.SearchBar.placeholder
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        return searchController
+    }()
 
     private let disposeBag = DisposeBag()
 
@@ -43,7 +55,6 @@ class SearchViewController: UIViewController, HasStepper {
 
     private func setupUI() {
         setupNavigationBar()
-        setupSearchBar()
         setupTableView()
     }
 
@@ -64,7 +75,8 @@ class SearchViewController: UIViewController, HasStepper {
                 })
             .disposed(by: disposeBag)
 
-        tableView.rx.modelSelected(RepositoryCellModel.self)
+        tableView.rx
+            .modelSelected(RepositoryCellModel.self)
             .do(onNext: { [weak self] _ in
                 if let selectedIndexPath = self?.tableView.indexPathForSelectedRow {
                     self?.tableView.deselectRow(at: selectedIndexPath, animated: true)
@@ -76,25 +88,26 @@ class SearchViewController: UIViewController, HasStepper {
             .subscribe()
             .disposed(by: disposeBag)
 
-        viewModel.showLoading$.asDriver(onErrorJustReturn: false)
+        viewModel.showLoading$
+            .asDriver(onErrorJustReturn: false)
             .drive(activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
 
         Observable.combineLatest(
-            viewModel.cells$.startWith([]),
-            viewModel.searchText.startWith("").asObservable(),
-            viewModel.showLoading$.startWith(false),
+            viewModel.cells$,
+            viewModel.searchText.asObservable(),
+            viewModel.showLoading$,
             resultSelector: { (cells, searchText, isLoading) -> (Bool, Bool, Bool) in
                 return (cells.isEmpty, searchText.isEmpty, isLoading)
             })
             .asDriver(onErrorJustReturn: (false, false, false))
-            .drive(onNext: { [weak self] (isSearchListEmpty, isSearchFieldEmpty, isLoading) in
+            .drive(onNext: { [weak self] (isResultListEmpty, isSearchFieldEmpty, isLoading) in
                 if isLoading {
                     self?.emptyLabel.isHidden = true
-                } else if isSearchListEmpty && isSearchFieldEmpty {
+                } else if isResultListEmpty && isSearchFieldEmpty {
                     self?.emptyLabel.text = L10n.Search.Empty.message
                     self?.emptyLabel.isHidden = false
-                } else if isSearchListEmpty && !isSearchFieldEmpty {
+                } else if isResultListEmpty && !isSearchFieldEmpty {
                     self?.emptyLabel.text = L10n.Search.Empty.noResult
                     self?.emptyLabel.isHidden = false
                 } else {
@@ -130,17 +143,8 @@ class SearchViewController: UIViewController, HasStepper {
     private func setupNavigationBar() {
         title = L10n.Search.title
 
-        let navigationBar = navigationController?.navigationBar
-
-        navigationBar?.barTintColor = UIColor.white
-        navigationBar?.isTranslucent = false
-        navigationBar?.setBackgroundImage(UIImage(), for: .default)
-        navigationBar?.shadowImage = UIImage()
-    }
-
-    private func setupSearchBar() {
-        searchBar.searchBarStyle = .minimal
-        searchBar.placeholder = L10n.Search.SearchBar.placeholder
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     private func setupTableView() {

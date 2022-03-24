@@ -12,6 +12,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxTest
+import InjectPropertyWrapper
 
 // swiftlint:disable file_length function_body_length
 class SearchViewControllerSpec: QuickSpec {
@@ -21,20 +22,22 @@ class SearchViewControllerSpec: QuickSpec {
             var sut: SearchViewController!
             var mockViewModel: MockSearchViewModel!
             var testScheduler: TestScheduler!
+            var assembler: MainAssembler!
             var disposeBag: DisposeBag!
 
             beforeEach {
-                MainAssembler.shared.create(with: TestAssembly())
-                let container = MainAssembler.shared.container
+                assembler = MainAssembler.create(withAssembly: TestAssembly())
+                InjectSettings.resolver = assembler.container
 
-                sut = container.get(SearchViewController.self)
-                mockViewModel = container.get(SearchViewModelProtocol.self) as? MockSearchViewModel
-                testScheduler = container.get(SchedulerType.self) as? TestScheduler
+                sut = assembler.resolver.resolve(SearchViewController.self)
+                mockViewModel = sut.viewModel as? MockSearchViewModel
+                testScheduler = assembler.container.resolve(SchedulerType.self) as? TestScheduler
                 disposeBag = DisposeBag()
             }
             
             afterEach {
                 disposeBag = nil
+                assembler.dispose()
             }
 
             it("can be instantiated") {
@@ -71,6 +74,7 @@ class SearchViewControllerSpec: QuickSpec {
             context("when the view model signals a list of cell models") {
                 beforeEach {
                     sut.loadViewIfNeeded()
+                    mockViewModel.searchText.accept("")
                     mockViewModel.expectCellsToReturn([
                         RepositoryCellModel(title: "Title", subtitle: "Subtitle", selectionCompletable: .empty())
                     ])
@@ -107,7 +111,7 @@ class SearchViewControllerSpec: QuickSpec {
             }
 
             context("""
-                given that the user enters text into the search bar \
+                given that the user entered text into the search bar \
                 and the loading has been finished \
                 and the view model signals an empty list of cell models
                 """) {
@@ -243,9 +247,16 @@ class SearchViewControllerSpec: QuickSpec {
                 }
             }
 
-            context("when the view models signals to show the loading activity indicator") {
+            context("""
+                given that the view model has signaled a list a cell models
+                and the user has entered text into search field
+                when the view models signals to show the loading activity indicator
+                """) {
                 beforeEach {
                     sut.loadViewIfNeeded()
+                    mockViewModel.expectCellsToReturn([])
+                    mockViewModel.searchText.accept("")
+
                     mockViewModel.expectShowLoadingToReturn(true)
                 }
 
@@ -258,7 +269,19 @@ class SearchViewControllerSpec: QuickSpec {
                 }
             }
 
-            context("when the view models signals to hide the loading activity indicator") {
+            context("""
+                given that the view model has signaled a list a cell models
+                and the user has entered text into search field
+                when the view models signals to hide the loading activity indicator
+                """) {
+                beforeEach {
+                    sut.loadViewIfNeeded()
+                    mockViewModel.expectCellsToReturn([])
+                    mockViewModel.searchText.accept("")
+
+                    mockViewModel.expectShowLoadingToReturn(false)
+                }
+
                 it("hides the activity indicator") {
                     sut.loadViewIfNeeded()
                     mockViewModel.expectShowLoadingToReturn(false)
@@ -292,10 +315,9 @@ class SearchViewControllerSpec: QuickSpec {
 
 extension SearchViewControllerSpec {
     
-    class TestAssembly: MainAssemblyProtocol {
-        let container: Container = .init()
+    class TestAssembly: Assembly {
 
-        func assemble() {
+        func assemble(container: Container) {
             container.register(SearchViewController.self) { _ in
                 let instance = StoryboardScene.SearchViewController.initialScene.instantiate()
                 return instance

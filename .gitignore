@@ -83,3 +83,9 @@ Temporary Items
 
 # Junk
 *.profraw
+
+# Generated
+OctoSearch/Generated/Strings.swift
+OctoSearch/Generated/StoryboardSeques.swift
+OctoSearch/Generated/Assets.swift
+OctoSearch/Generated/StoryboardScenes.swift

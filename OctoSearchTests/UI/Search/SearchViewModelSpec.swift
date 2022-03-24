@@ -11,6 +11,7 @@ import SwinjectStoryboard
 import RxCocoa
 import RxSwift
 import RxFlow
+import InjectPropertyWrapper
 
 // swiftlint:disable file_length function_body_length
 class SearchViewModelSpec: QuickSpec {
@@ -19,12 +20,14 @@ class SearchViewModelSpec: QuickSpec {
         describe("SearchViewModel") {
             var sut: SearchViewModel!
             var mockSearchService: MockSearchService!
+            var assembler: MainAssembler!
             var disposeBag: DisposeBag!
 
             beforeEach {
-                MainAssembler.shared.create(with: TestAssembly())
+                assembler = MainAssembler.create(withAssembly: TestAssembly())
+                InjectSettings.resolver = assembler.container
 
-                let container = MainAssembler.shared.container
+                let container = assembler.container
                 sut = container.resolve(SearchViewModel.self)
                 mockSearchService = container.resolve(SearchServiceProtocol.self) as? MockSearchService
                 disposeBag = DisposeBag()
@@ -53,7 +56,7 @@ class SearchViewModelSpec: QuickSpec {
                             }).disposed(by: disposeBag)
                     }
 
-                    context("and the Search Services returned a list of Repositories") {
+                    context("and the Search Service returned a list of Repositories") {
                         var expectedRepository: Repository!
 
                         beforeEach {
@@ -393,10 +396,9 @@ class SearchViewModelSpec: QuickSpec {
 
 extension SearchViewModelSpec {
     
-    class TestAssembly: MainAssemblyProtocol {
-        var container: Container = .init()
+    class TestAssembly: Assembly {
 
-        func assemble() {
+        func assemble(container: Container) {
             container.register(SearchViewModel.self) { _ in
                 let instance = SearchViewModel()
                 return instance

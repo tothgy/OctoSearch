@@ -6,6 +6,7 @@
 import Foundation
 import RxSwift
 import Moya
+import InjectPropertyWrapper
 
 protocol SearchServiceProtocol {
     func search(_ searchText: String) -> Single<([Repository], URL?)>

@@ -12,6 +12,7 @@ import Swinject
 import RxFlow
 import RxTest
 import ViewControllerPresentationSpy
+import InjectPropertyWrapper
 
 // swiftlint:disable file_length
 class AppFlowSpec: QuickSpec {
@@ -22,11 +23,13 @@ class AppFlowSpec: QuickSpec {
             var sut: AppFlow!
             var testCoordinator: FlowCoordinator!
             var testStepper: TestStepper!
+            var assembler: MainAssembler!
 
             beforeEach {
-                MainAssembler.shared.create(with: TestAssembly())
+                assembler = MainAssembler.create(withAssembly: TestAssembly())
+                InjectSettings.resolver = assembler.container
 
-                let container = MainAssembler.shared.container
+                let container = assembler.container
                 sut = container.resolve(AppFlow.self)
 
                 testStepper = TestStepper()
@@ -82,10 +85,9 @@ class AppFlowSpec: QuickSpec {
 
 extension AppFlowSpec {
     
-    class TestAssembly: MainAssemblyProtocol {
-        var container: Container = .init()
+    class TestAssembly: Assembly {
 
-        func assemble() {
+        func assemble(container: Container) {
             container.register(AppFlow.self) { _ in
                 let instance = AppFlow()
                 return instance

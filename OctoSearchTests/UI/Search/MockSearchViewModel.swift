@@ -63,12 +63,13 @@ class MockSearchViewModelBase: SearchViewModelProtocol {
 }
 
 class MockSearchViewModel: MockSearchViewModelBase {
+
     override init() {
         super.init()
         stubbedSearchText = .init()
         stubbedLoadNextPageRelay = .init()
         stubbedCells = cellsSubject
-        stubbedShowLoading = showLoadingSubject
+        stubbedShowLoading = showLoadingRelay.asObservable()
         stubbedStepper = DefaultStepper()
     }
 
@@ -77,8 +78,8 @@ class MockSearchViewModel: MockSearchViewModelBase {
         cellsSubject.onNext(value)
     }
 
-    private let showLoadingSubject = ReplaySubject<Bool>.create(bufferSize: 1)
+    private let showLoadingRelay: BehaviorRelay<Bool> = .init(value: false)
     func expectShowLoadingToReturn(_ value: Bool) {
-        showLoadingSubject.onNext(value)
+        showLoadingRelay.accept(value)
     }
 }
