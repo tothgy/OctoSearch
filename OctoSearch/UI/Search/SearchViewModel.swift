@@ -77,6 +77,7 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
         let searchResults$ = searchText
             .filter({ !$0.isEmpty })
             .do(onNext: { [weak self] _ in
+                self?.nextPageSubject.onNext(nil)
                 self?.showLoadingRelay.accept(true)
             })
             .flatMapLatest({ [weak self] (searchText: String) -> Observable<[Repository]> in
@@ -100,6 +101,9 @@ class SearchViewModel: SearchViewModelProtocol, Stepper {
 
         let clearResults$: Observable<[RepositoryCellModel]> = searchText
             .filter({ $0.isEmpty })
+            .do(onNext: { [weak self] _ in
+                self?.nextPageSubject.onNext(nil)
+            })
             .mapTo([])
 
         cells$ = Observable

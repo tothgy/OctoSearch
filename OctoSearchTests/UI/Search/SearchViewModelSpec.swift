@@ -270,6 +270,45 @@ class SearchViewModelSpec: QuickSpec {
                                     }
                                 }).disposed(by: disposeBag)
                         }
+
+                        context("""
+                            and then an empty search term is published
+                            and loading the next page is requested
+                            """) {
+                            it("emits an empty list of cell models") {
+                                subscribe(
+                                    to: sut.cells$,
+                                    trigger: {
+                                        sut.searchText.accept("")
+                                        sut.loadNextPageRelay.accept(())
+                                    },
+                                    verify: {(emissions: [[RepositoryCellModel]]) in
+                                        expect(emissions).to(haveCount(3))
+                                        let cellModels = emissions.last!
+                                        expect(cellModels).to(beEmpty())
+                                    }).disposed(by: disposeBag)
+
+                            }
+
+                            context("""
+                                and then a new search term is published
+                                and loading the next page is requested
+                                """) {
+                                it("emits an empty list of cell models") {
+                                    subscribe(
+                                        to: sut.cells$,
+                                        trigger: {
+                                            sut.searchText.accept("")
+                                            sut.loadNextPageRelay.accept(())
+                                        },
+                                        verify: {(emissions: [[RepositoryCellModel]]) in
+                                            expect(emissions).to(haveCount(3))
+                                            let cellModels = emissions.last!
+                                            expect(cellModels).to(beEmpty())
+                                        }).disposed(by: disposeBag)
+
+                                }
+                        }
                     }
                 }
             }
